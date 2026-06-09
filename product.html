@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hair Braiding Training Manual — Kastrit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #FAF6F1;
+      --warm-white: #FFFDF9;
+      --gold:       #C9A96E;
+      --gold-light: #E8D5B0;
+      --terracotta: #C4714A;
+      --dark:       #1E1512;
+      --mid:        #6B5B52;
+      --soft:       #A89080;
+      --border:     #EDE3D8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--warm-white);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      line-height: 1.15;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .container--wide {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--warm-white);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar__logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--dark);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .navbar__cta {
+      background: var(--dark);
+      color: #fff;
+      padding: 10px 22px;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+    .navbar__cta:hover { background: var(--terracotta); }
+
+    /* ── HERO (ATTENTION) ── */
+    .hero {
+      background: var(--cream);
+      padding: 90px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+
+    .hero__eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 20px;
+    }
+
+    .hero__title {
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 700;
+      color: var(--dark);
+      max-width: 780px;
+      margin: 0 auto 24px;
+    }
+
+    .hero__title span {
+      color: var(--terracotta);
+      font-style: italic;
+    }
+
+    .hero__subtitle {
+      font-size: 1.1rem;
+      color: var(--mid);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+    }
+
+    .hero__price-block {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 36px;
+    }
+
+    .hero__price-original {
+      font-size: 1rem;
+      color: var(--soft);
+      text-decoration: line-through;
+      letter-spacing: 0.04em;
+    }
+
+    .hero__price-current {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.6rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .hero__price-note {
+      font-size: 0.72rem;
+      color: var(--terracotta);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero__cta {
+      display: inline-block;
+      background: var(--terracotta);
+      color: #fff;
+      padding: 18px 52px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+      margin-bottom: 20px;
+    }
+    .hero__cta:hover { background: #b05e3a; transform: translateY(-1px); }
+
+    .hero__guarantee {
+      font-size: 0.78rem;
+      color: var(--soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .hero__badges {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 56px;
+      flex-wrap: wrap;
+    }
+
+    .hero__badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero__badge-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    .hero__badge-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 80px;
+      margin: 0 auto;
+    }
+
+    /* ── INTEREST SECTION ── */
+    .section {
+      padding: 90px 24px;
+    }
+
+    .section--alt {
+      background: var(--cream);
+    }
+
+    .section__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .section__title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: var(--dark);
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 16px;
+    }
+
+    .section__subtitle {
+      font-size: 1rem;
+      color: var(--mid);
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto 60px;
+      font-weight: 300;
+    }
+
+    /* Learn Grid */
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .learn-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .learn-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+
+    .learn-card__number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .learn-card__title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .learn-card__desc {
+      font-size: 0.88rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ── WHAT'S INCLUDED ── */
+    .included-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .included-wrapper { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .included-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .included-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 0.95rem;
+      color: var(--mid);
+    }
+
+    .included-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.7rem;
+      margin-top: 4px;
+      flex-shrink: 0;
+    }
+
+    .included-list li strong {
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .included-box {
+      background: var(--dark);
+      color: #fff;
+      border-radius: 4px;
+      padding: 40px 36px;
+    }
+
+    .included-box__label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .included-box__title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      color: #fff;
+    }
+
+    .included-box__detail {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.8;
+    }
+
+    .included-box__detail span {
+      display: block;
+    }
+
+    /* ── BONUS ── */
+    .bonus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 680px) {
+      .bonus-grid { grid-template-columns: 1fr; }
+    }
+
+    .bonus-card {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px 24px;
+      text-align: center;
+      background: var(--warm-white);
+    }
+
+    .bonus-card__emoji {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+
+    .bonus-card__title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .bonus-card__desc {
+      font-size: 0.83rem;
+      color: var(--mid);
+    }
+
+    .bonus-tag {
+      display: inline-block;
+      background: var(--terracotta);
+      color: #fff;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 2px;
+      margin-bottom: 36px;
+    }
+
+    /* ── PLR/MRR BANNER ── */
+    .plr-banner {
+      background: linear-gradient(135deg, var(--dark) 0%, #3a2a22 100%);
+      color: #fff;
+      padding: 70px 24px;
+      text-align: center;
+    }
+
+    .plr-banner__eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .plr-banner__title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .plr-banner__sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      max-width: 520px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+    }
+
+    .plr-pills {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .plr-pill {
+      border: 1px solid rgba(201,169,110,0.4);
+      color: var(--gold-light);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── TESTIMONIALS (DESIRE) ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px 28px;
+    }
+
+    .testimonial-card__stars {
+      color: var(--gold);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-card__text {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .testimonial-card__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-card__avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .testimonial-card__name {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--dark);
+    }
+
+    .testimonial-card__role {
+      font-size: 0.76rem;
+      color: var(--soft);
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .faq-item__question {
+      width: 100%;
+      background: var(--warm-white);
+      border: none;
+      padding: 22px 28px;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--dark);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.15s;
+    }
+    .faq-item__question:hover { background: var(--cream); }
+
+    .faq-item__icon {
+      color: var(--gold);
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+
+    .faq-item__answer {
+      background: var(--cream);
+      padding: 0 28px;
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.75;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+
+    .faq-item.open .faq-item__answer {
+      max-height: 300px;
+      padding: 20px 28px 24px;
+    }
+
+    .faq-item.open .faq-item__icon {
+      transform: rotate(45deg);
+    }
+
+    /* ── FINAL CTA (ACTION) ── */
+    .final-cta {
+      background: var(--cream);
+      padding: 100px 24px;
+      text-align: center;
+    }
+
+    .final-cta__eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 16px;
+    }
+
+    .final-cta__title {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+
+    .final-cta__sub {
+      font-size: 1rem;
+      color: var(--mid);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      font-weight: 300;
+    }
+
+    .final-cta__price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+
+    .final-cta__original {
+      font-size: 1.3rem;
+      color: var(--soft);
+      text-decoration: line-through;
+    }
+
+    .final-cta__price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1;
+    }
+
+    .final-cta__btn {
+      display: inline-block;
+      background: var(--terracotta);
+      color: #fff;
+      padding: 20px 64px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+      margin-bottom: 18px;
+    }
+    .final-cta__btn:hover { background: #b05e3a; transform: translateY(-1px); }
+
+    .final-cta__perks {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .final-cta__perk {
+      font-size: 0.76rem;
+      color: var(--soft);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .final-cta__perk::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: rgba(255,255,255,0.45);
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+
+    footer a {
+      color: rgba(255,255,255,0.45);
+      text-decoration: underline;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .hero { padding: 60px 20px 56px; }
+      .section { padding: 64px 20px; }
+      .hero__badges { gap: 20px; }
+      .navbar__cta { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__logo">Kastrit</a>
+      <a href="#buy" class="navbar__cta">Get Instant Access</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════
+       A — ATTENTION : HERO
+  ══════════════════════════════════════ -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero__eyebrow">✦ The Complete Hair Braiding Manual ✦</span>
+
+      <h1 class="hero__title">
+        Everything You Need to <span>Start Your Braiding Career</span> — In One Digital Guide
+      </h1>
+
+      <p class="hero__subtitle">
+        A professional-grade training manual designed for beginners, beauty students, and aspiring hairstylists ready to turn their passion into a real skill.
+      </p>
+
+      <div class="hero__price-block">
+        <span class="hero__price-original">Regular Price: $97.00</span>
+        <span class="hero__price-current">$9.99</span>
+        <span class="hero__price-note">Limited Launch Price — Instant Download</span>
+      </div>
+
+      <br />
+      <a href="#buy" class="hero__cta">Yes, I Want This Guide →</a>
+      <br />
+      <span class="hero__guarantee">🔒 &nbsp;Instant PDF Delivery · No experience required</span>
+
+      <div class="hero__badges">
+        <div class="hero__badge">
+          <div class="hero__badge-icon">📄</div>
+          <span class="hero__badge-label">47 Pages</span>
+        </div>
+        <div class="hero__badge">
+          <div class="hero__badge-icon">⚡</div>
+          <span class="hero__badge-label">Instant Download</span>
+        </div>
+        <div class="hero__badge">
+          <div class="hero__badge-icon">🎁</div>
+          <span class="hero__badge-label">3 Free Bonuses</span>
+        </div>
+        <div class="hero__badge">
+          <div class="hero__badge-icon">🔁</div>
+          <span class="hero__badge-label">PLR / MRR Rights</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       I — INTEREST : WHAT YOU WILL LEARN
+  ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container--wide">
+      <p class="section__eyebrow">What's Inside</p>
+      <h2 class="section__title">Six Core Modules to Master the Fundamentals</h2>
+      <p class="section__subtitle">Each module is written to be clear, practical, and immediately applicable — no fluff, no filler.</p>
+
+      <div class="learn-grid">
+        <div class="learn-card">
+          <div class="learn-card__number">01</div>
+          <div class="learn-card__title">Understanding Hair Types</div>
+          <p class="learn-card__desc">Learn how different textures, porosity levels, and curl patterns affect your technique — so you can work with any client confidently.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-card__number">02</div>
+          <div class="learn-card__title">Essential Styling Tools</div>
+          <p class="learn-card__desc">A complete breakdown of every tool you need, what it does, and how to use it — from day one.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-card__number">03</div>
+          <div class="learn-card__title">Basic Braiding Techniques</div>
+          <p class="learn-card__desc">Step-by-step breakdowns of the foundational braiding styles every hairstylist must know before anything else.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-card__number">04</div>
+          <div class="learn-card__title">The Braiding Process</div>
+          <p class="learn-card__desc">Follow a clear, sequential process that takes you from prep to finished look — every time, without guesswork.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-card__number">05</div>
+          <div class="learn-card__title">Hair Care Basics</div>
+          <p class="learn-card__desc">Understand scalp health, moisture routines, and aftercare — the knowledge that separates good stylists from great ones.</p>
+        </div>
+        <div class="learn-card">
+          <div class="learn-card__number">06</div>
+          <div class="learn-card__title">Practice Pages</div>
+          <p class="learn-card__desc">Dedicated pages to reinforce your learning through guided exercises — because real skill comes from repetition.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="section__eyebrow">What You Get</p>
+      <h2 class="section__title">A Complete Professional Package</h2>
+      <p class="section__subtitle">Everything you need to start, practice, and grow — delivered instantly to your inbox.</p>
+
+      <div class="included-wrapper">
+        <ul class="included-list">
+          <li><div><strong>47-Page Training Manual</strong> — Comprehensive, beautifully structured guide from first braid to finished style.</div></li>
+          <li><div><strong>Beginner-Friendly Format</strong> — Written in plain language with step-by-step instructions anyone can follow.</div></li>
+          <li><div><strong>Easy-to-Follow Layout</strong> — Clean visual design so you can focus on learning, not decoding.</div></li>
+          <li><div><strong>Instant Digital Download</strong> — Access your guide the moment your order is confirmed. No waiting.</div></li>
+          <li><div><strong>PLR &amp; MRR License Included</strong> — Resell this guide as your own product and keep 100% of the profits.</div></li>
+        </ul>
+
+        <div class="included-box">
+          <p class="included-box__label">Product Details</p>
+          <h3 class="included-box__title">Hair Braiding Training Manual</h3>
+          <p class="included-box__detail">
+            <span>Format — PDF</span>
+            <span>Pages — 47</span>
+            <span>Type — Digital Download</span>
+            <span>Delivery — Instant after purchase</span>
+            <span>License — PLR / MRR Included</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       D — DESIRE : BONUSES + PLR + TESTIMONIALS
+  ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center; margin-bottom: 40px;">
+        <span class="bonus-tag">🎁 FREE Bonuses — Included Today Only</span>
+      </div>
+
+      <p class="section__eyebrow">Exclusive Bonuses</p>
+      <h2 class="section__title">Three Business-Ready Templates — On Us</h2>
+      <p class="section__subtitle">These tools help you go from student to professional from day one.</p>
+
+      <div class="bonus-grid">
+        <div class="bonus-card">
+          <div class="bonus-card__emoji">📋</div>
+          <div class="bonus-card__title">Client Consultation Form</div>
+          <p class="bonus-card__desc">A ready-to-use form to understand your clients' needs before every appointment — like a pro.</p>
+        </div>
+        <div class="bonus-card">
+          <div class="bonus-card__emoji">💲</div>
+          <div class="bonus-card__title">Hair Service Price List Template</div>
+          <p class="bonus-card__desc">Set your rates with confidence using a polished, customizable price list template.</p>
+        </div>
+        <div class="bonus-card">
+          <div class="bonus-card__emoji">📅</div>
+          <div class="bonus-card__title">Appointment Card Template</div>
+          <p class="bonus-card__desc">Keep your bookings organized and look established from your very first client.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLR / MRR BANNER -->
+  <section class="plr-banner">
+    <p class="plr-banner__eyebrow">✦ PLR &amp; MRR License Included ✦</p>
+    <h2 class="plr-banner__title">Buy Once. Resell Endlessly. Keep Every Dollar.</h2>
+    <p class="plr-banner__sub">
+      This guide comes with full Private Label Rights and Master Resell Rights. That means you can rebrand it, sell it as your own, and pocket 100% of every sale — turning a $9.99 investment into a real income stream.
+    </p>
+    <div class="plr-pills">
+      <span class="plr-pill">✓ Sell as your own product</span>
+      <span class="plr-pill">✓ Keep 100% of profits</span>
+      <span class="plr-pill">✓ Rebrand freely</span>
+      <span class="plr-pill">✓ No royalties. Ever.</span>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section--alt">
+    <div class="container--wide">
+      <p class="section__eyebrow">What They're Saying</p>
+      <h2 class="section__title">Real Results from Real Women</h2>
+      <p class="section__subtitle">Hundreds of beginners have used this guide to launch their braiding journey.</p>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__text">"I had zero experience with braiding before this. The step-by-step format made everything click instantly. I did my first braid the same day I downloaded it."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">J</div>
+            <div>
+              <div class="testimonial-card__name">Jessica M.</div>
+              <div class="testimonial-card__role">Beauty Student, Atlanta</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__text">"The bonuses alone are worth it. I used the consultation form and price list template in my first week. It made me look so much more professional to clients."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">T</div>
+            <div>
+              <div class="testimonial-card__name">Tanya R.</div>
+              <div class="testimonial-card__role">Freelance Hairstylist, Houston</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-card__stars">★★★★★</div>
+          <p class="testimonial-card__text">"I bought this for the PLR rights and ended up actually reading the whole thing. The quality is honestly impressive for the price. Resold it twice already."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">A</div>
+            <div>
+              <div class="testimonial-card__name">Aaliyah K.</div>
+              <div class="testimonial-card__role">Digital Entrepreneur, Chicago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FAQ
+  ══════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <p class="section__eyebrow">Got Questions?</p>
+      <h2 class="section__title">Frequently Asked Questions</h2>
+      <p class="section__subtitle" style="margin-bottom: 48px;">Everything you need to know before you buy.</p>
+
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-item__question">
+            Do I need any experience to use this guide?
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            Not at all. This manual was built specifically for complete beginners. It walks you through everything from the basics of hair types all the way to your first braiding techniques — in simple, jargon-free language.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__question">
+            How do I receive my download after purchase?
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            Instantly. As soon as your payment is confirmed, you'll receive an email with a direct download link to your PDF. No waiting, no shipping — just immediate access.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__question">
+            What does PLR / MRR mean exactly?
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            PLR stands for Private Label Rights — you can rebrand this guide with your own name and logo. MRR stands for Master Resell Rights — you can sell it to others and keep 100% of the revenue. Think of it as buying a product once and turning it into your own income stream.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__question">
+            Can I resell this guide and keep all the money?
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            Yes. The PLR/MRR license lets you sell this guide as your own digital product at any price you choose. No royalties, no revenue sharing. Every dollar from your sales is yours.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__question">
+            What format is the guide in?
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            The guide is a 47-page PDF, compatible with any device — phone, tablet, laptop, or desktop. You can read it on screen or print it out if you prefer a physical copy.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-item__question">
+            Is there a refund policy?
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            Because this is a digital product with instant access, all sales are final. If you have any issues accessing your files after purchase, reach out to our support team and we'll make it right.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       A — ACTION : FINAL CTA
+  ══════════════════════════════════════ -->
+  <section class="final-cta" id="buy">
+    <div class="container">
+      <p class="final-cta__eyebrow">✦ Limited Launch Price ✦</p>
+      <h2 class="final-cta__title">Your Braiding Journey Starts Today</h2>
+      <p class="final-cta__sub">Get the complete 47-page training manual, three professional business templates, and full PLR/MRR resell rights — all for less than a coffee.</p>
+
+      <div class="final-cta__price-row">
+        <span class="final-cta__original">$97</span>
+        <span class="final-cta__price">$9.99</span>
+      </div>
+
+      <a href="#" class="final-cta__btn">Get Instant Access Now →</a>
+
+      <div class="final-cta__perks">
+        <span class="final-cta__perk">Instant PDF Download</span>
+        <span class="final-cta__perk">PLR & MRR License Included</span>
+        <span class="final-cta__perk">3 Free Business Templates</span>
+        <span class="final-cta__perk">Works on Any Device</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Kastrit. All rights reserved. &nbsp;·&nbsp; <a href="#">Privacy Policy</a> &nbsp;·&nbsp; <a href="#">Terms of Service</a></p>
+  </footer>
+
+  <!-- FAQ ACCORDION SCRIPT -->
+  <script>
+    document.querySelectorAll('.faq-item__question').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+
+</body>
+</html>
