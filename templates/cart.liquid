@@ -1,0 +1,75 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart — {{ shop.name }}</title>
+  {{ content_for_header }}
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Inter',sans-serif;background:#FAF6F1;color:#1E1512;min-height:100vh;display:flex;flex-direction:column}
+    .nav{background:#FFFDF9;border-bottom:1px solid #EDE3D8;padding:16px 24px}
+    .nav__inner{max-width:700px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .nav__logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;letter-spacing:.1em;color:#1E1512;text-decoration:none;text-transform:uppercase}
+    .main{flex:1;max-width:700px;margin:0 auto;width:100%;padding:48px 24px}
+    h1{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;margin-bottom:32px;color:#1E1512}
+    .cart-item{display:flex;align-items:center;gap:16px;padding:20px 0;border-bottom:1px solid #EDE3D8}
+    .cart-item__img{width:64px;height:64px;background:#E8D5B0;border-radius:4px;flex-shrink:0;overflow:hidden}
+    .cart-item__img img{width:100%;height:100%;object-fit:cover}
+    .cart-item__info{flex:1}
+    .cart-item__title{font-weight:600;font-size:.9rem;color:#1E1512;margin-bottom:4px}
+    .cart-item__price{font-size:.85rem;color:#6B5B52}
+    .cart-total{display:flex;justify-content:space-between;align-items:center;padding:24px 0;font-weight:600;font-size:1rem}
+    .cart-total__amount{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700}
+    .btn{display:block;width:100%;background:#C4714A;color:#fff;padding:16px;font-size:.85rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;text-align:center;text-decoration:none;transition:background .2s;margin-bottom:12px}
+    .btn:hover{background:#b05e3a}
+    .btn--outline{background:transparent;color:#6B5B52;border:1px solid #EDE3D8}
+    .btn--outline:hover{background:#EDE3D8}
+    .empty{text-align:center;padding:60px 24px;color:#6B5B52}
+    .empty h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:12px;color:#1E1512}
+    footer{background:#1E1512;color:rgba(255,255,255,.4);text-align:center;padding:24px;font-size:.72rem}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="/" class="nav__logo">{{ shop.name }}</a>
+    </div>
+  </nav>
+
+  <main class="main">
+    {% if cart.item_count > 0 %}
+      <h1>Your Cart</h1>
+      <form action="/cart" method="post">
+        {% for item in cart.items %}
+          <div class="cart-item">
+            <div class="cart-item__img">
+              {% if item.image %}<img src="{{ item.image | img_url: '100x100' }}" alt="{{ item.title }}">{% endif %}
+            </div>
+            <div class="cart-item__info">
+              <div class="cart-item__title">{{ item.title }}</div>
+              <div class="cart-item__price">{{ item.price | money }}</div>
+            </div>
+          </div>
+        {% endfor %}
+        <div class="cart-total">
+          <span>Total</span>
+          <span class="cart-total__amount">{{ cart.total_price | money }}</span>
+        </div>
+        <button type="submit" name="checkout" class="btn">Proceed to Checkout →</button>
+      </form>
+      <a href="javascript:history.back()" class="btn btn--outline">← Continue Shopping</a>
+    {% else %}
+      <div class="empty">
+        <h2>Your cart is empty</h2>
+        <p style="margin-bottom:24px">Looks like you haven't added anything yet.</p>
+        <a href="{{ collections.all.products.first.url }}" class="btn" style="display:inline-block;width:auto;padding:14px 32px">Shop Now →</a>
+      </div>
+    {% endif %}
+  </main>
+
+  <footer>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</footer>
+</body>
+</html>

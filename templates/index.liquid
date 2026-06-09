@@ -2,18 +2,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kastrit</title>
-  {% if collections.all.products.first %}
-    <meta http-equiv="refresh" content="0; url={{ collections.all.products.first.url }}" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ shop.name }}</title>
+  {% assign first_product = collections.all.products.first %}
+  {% if first_product %}
+    <meta http-equiv="refresh" content="0; url={{ first_product.url }}">
   {% endif %}
+  {{ content_for_header }}
   <style>
-    body { margin: 0; background: #FAF6F1; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: 'Georgia', serif; }
-    a { color: #C4714A; font-size: 1.1rem; text-decoration: none; border-bottom: 1px solid #C4714A; }
+    body{margin:0;background:#FAF6F1;display:flex;align-items:center;justify-content:center;height:100vh;font-family:Georgia,serif}
+    a{color:#C4714A;font-size:1rem;text-decoration:none;border-bottom:1px solid #C4714A}
   </style>
 </head>
 <body>
-  <a href="/products/hair-braiding-training-manual">Enter Kastrit →</a>
+  {% if first_product %}
+    <a href="{{ first_product.url }}">Enter {{ shop.name }} →</a>
+  {% else %}
+    <p style="color:#6B5B52">Coming soon.</p>
+  {% endif %}
 </body>
 </html>
