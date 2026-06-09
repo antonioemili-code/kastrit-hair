@@ -1,0 +1,23 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kastrit</title>
+  {% if collections.all.products.first %}
+    <meta http-equiv="refresh" content="0; url={{ collections.all.products.first.url }}" />
+  {% endif %}
+  <style>
+    body { margin: 0; background: #FAF6F1; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: 'Georgia', serif; }
+    a { color: #C4714A; font-size: 1.1rem; text-decoration: none; border-bottom: 1px solid #C4714A; }
+  </style>
+</head>
+<body>
+  {% if collections.all.products.first %}
+    <a href="{{ collections.all.products.first.url }}">Enter Kastrit →</a>
+  {% else %}
+    <p style="color:#6B5B52; font-size:1rem;">Store coming soon.</p>
+  {% endif %}
+</body>
+</html>
