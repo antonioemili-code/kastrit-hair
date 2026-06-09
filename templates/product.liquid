@@ -131,6 +131,29 @@
 
     .divider{height:1px;background:var(--border);max-width:70px;margin:0 auto}
 
+    /* PAIN POINTS */
+    .hero__pain{max-width:560px;margin:0 auto 36px;text-align:left}
+    .hero__pain p{font-size:.95rem;color:var(--mid);margin-bottom:10px;padding-left:16px;border-left:2px solid var(--gold-light)}
+    .hero__pain-close{font-size:1rem!important;color:var(--dark)!important;border-left-color:var(--terracotta)!important;margin-top:18px!important}
+
+    /* INTRO BLOCK */
+    .intro-block{max-width:620px;margin:28px auto 0;display:flex;flex-direction:column;gap:14px}
+    .intro-block p{font-size:1rem;color:var(--mid);text-align:center;font-weight:300}
+
+    /* PERFECT FOR */
+    .for-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:780px;margin:0 auto}
+    .for-item{background:var(--warm-white);border:1px solid var(--border);border-radius:4px;padding:16px 20px;font-size:.9rem;color:var(--dark);font-weight:500}
+
+    /* WHY DIFFERENT */
+    .why-block{max-width:640px;margin:28px auto 0;display:flex;flex-direction:column;gap:16px}
+    .why-block p{font-size:1rem;color:var(--mid);font-weight:300;line-height:1.8}
+
+    /* INSTANT DOWNLOAD */
+    .download-block{max-width:540px;margin:24px auto 0}
+    .download-block p{font-size:1rem;color:var(--mid);font-weight:300;margin-bottom:28px;line-height:1.8}
+    .download-pills{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+    .download-pill{background:var(--dark);color:#fff;padding:8px 20px;border-radius:100px;font-size:.78rem;font-weight:600;letter-spacing:.06em}
+
     /* HERO MOCKUP */
     .hero__mockup{margin-top:48px;max-width:320px;margin-left:auto;margin-right:auto;filter:drop-shadow(0 20px 40px rgba(30,21,18,.15))}
     .hero__mockup img{width:100%;border-radius:4px}
@@ -172,11 +195,19 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <span class="hero__tag">✦ The Complete Hair Braiding Manual ✦</span>
+      <span class="hero__tag">✦ Hair Braiding Training Manual ✦</span>
       <h1 class="hero__title">
-        Everything You Need to <em>Start Your Braiding Career</em> — In One Digital Guide
+        Learn the Art of Professional Braiding <em>Even If You're Starting From Zero</em>
       </h1>
-      <p class="hero__sub">A professional-grade training manual for beginners, beauty students, and aspiring hairstylists ready to turn their passion into a real skill.</p>
+      <p class="hero__sub">The practical guide that teaches you step by step how to create neat, precise, professional braids — without expensive in-person courses.</p>
+      <div class="hero__pain">
+        <p>Have you always wanted to learn how to braid perfectly but don't know where to start?</p>
+        <p>Maybe you watch tutorials online that skip the most important steps.</p>
+        <p>Maybe you've already tried a few styles but the result is never what you hoped for.</p>
+        <p>Or maybe you want to build a skill that could one day become a paid service.</p>
+        <p class="hero__pain-close"><strong>If any of this sounds like you — this guide was made for you.</strong></p>
+      </div>
+
       <div class="hero__price">
         <span class="hero__price-was">Regular Price: {{ current_variant.compare_at_price | money }}</span>
         <span class="hero__price-now">{{ current_variant.price | money }}</span>
@@ -205,19 +236,32 @@
     </div>
   </div>
 
+  <!-- PRODUCT INTRO -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="section__tag">Introducing</p>
+      <h2 class="section__title">The Hair Braiding Training Manual</h2>
+      <p class="section__sub" style="margin-bottom:0">A complete 47-page digital manual designed to teach you the fundamentals of hair braiding in a simple, practical, and easy-to-follow way.</p>
+      <div class="intro-block">
+        <p>Each section guides you step by step through the core techniques used by professional hairstylists.</p>
+        <p>No experience required. Just clear instructions that help you improve your skills gradually and with confidence.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- WHAT YOU'LL LEARN -->
   <section class="section">
     <div class="container--wide">
-      <p class="section__tag">What's Inside</p>
-      <h2 class="section__title">Six Core Modules to Master the Fundamentals</h2>
+      <p class="section__tag">What You Will Learn</p>
+      <h2 class="section__title">Six Modules. One Solid Foundation.</h2>
       <p class="section__sub">Clear, practical, immediately applicable — no fluff, no filler.</p>
       <div class="learn-grid">
-        <div class="learn-card"><div class="learn-card__num">01</div><div class="learn-card__title">Understanding Hair Types</div><p class="learn-card__desc">Learn how different textures, porosity levels, and curl patterns affect your technique — so you can work with any client confidently.</p></div>
-        <div class="learn-card"><div class="learn-card__num">02</div><div class="learn-card__title">Essential Styling Tools</div><p class="learn-card__desc">A complete breakdown of every tool you need, what it does, and how to use it — from day one.</p></div>
-        <div class="learn-card"><div class="learn-card__num">03</div><div class="learn-card__title">Basic Braiding Techniques</div><p class="learn-card__desc">Step-by-step breakdowns of the foundational braiding styles every hairstylist must know.</p></div>
-        <div class="learn-card"><div class="learn-card__num">04</div><div class="learn-card__title">The Braiding Process</div><p class="learn-card__desc">Follow a clear, sequential process from prep to finished look — every time, without guesswork.</p></div>
-        <div class="learn-card"><div class="learn-card__num">05</div><div class="learn-card__title">Hair Care Basics</div><p class="learn-card__desc">Understand scalp health, moisture routines, and aftercare — the knowledge that separates great stylists.</p></div>
-        <div class="learn-card"><div class="learn-card__num">06</div><div class="learn-card__title">Practice Pages</div><p class="learn-card__desc">Guided exercises to reinforce your learning — because real skill comes from repetition.</p></div>
+        <div class="learn-card"><div class="learn-card__num">01</div><div class="learn-card__title">Understanding Hair Types</div><p class="learn-card__desc">Discover how to work correctly with different textures and characteristics to get better results from the very beginning.</p></div>
+        <div class="learn-card"><div class="learn-card__num">02</div><div class="learn-card__title">Essential Styling Tools</div><p class="learn-card__desc">Learn the tools professionals use every day — and exactly when and how to use them.</p></div>
+        <div class="learn-card"><div class="learn-card__num">03</div><div class="learn-card__title">Basic Braiding Techniques</div><p class="learn-card__desc">Master the fundamentals that will allow you to build solid, lasting skills from day one.</p></div>
+        <div class="learn-card"><div class="learn-card__num">04</div><div class="learn-card__title">Step-by-Step Process</div><p class="learn-card__desc">Follow a practical path that eliminates confusion and random trial and error.</p></div>
+        <div class="learn-card"><div class="learn-card__num">05</div><div class="learn-card__title">Hair Care Basics</div><p class="learn-card__desc">Learn the essentials of keeping hair healthy and ready for any style.</p></div>
+        <div class="learn-card"><div class="learn-card__num">06</div><div class="learn-card__title">Practice Pages</div><p class="learn-card__desc">Train with practical exercises designed to improve your speed, precision, and confidence.</p></div>
       </div>
     </div>
   </section>
@@ -227,15 +271,16 @@
   <!-- INCLUDED -->
   <section class="section section--alt">
     <div class="container">
-      <p class="section__tag">What You Get</p>
-      <h2 class="section__title">A Complete Professional Package</h2>
+      <p class="section__tag">What You Receive</p>
+      <h2 class="section__title">Everything Included</h2>
       <p class="section__sub">Everything you need to start, practice, and grow — delivered instantly.</p>
       <div class="included-grid">
         <ul class="check-list">
-          <li><div><strong>47-Page Training Manual</strong> — Comprehensive guide from first braid to finished style.</div></li>
-          <li><div><strong>Beginner-Friendly Format</strong> — Plain language, step-by-step instructions anyone can follow.</div></li>
-          <li><div><strong>Easy-to-Follow Layout</strong> — Clean design so you focus on learning, not decoding.</div></li>
-          <li><div><strong>Instant Digital Download</strong> — Access the moment your order is confirmed.</div></li>
+          <li><div><strong>47-Page Hair Braiding Training Manual</strong> — The complete digital guide.</div></li>
+          <li><div><strong>Beginner-Friendly Guide</strong> — Written for people with zero prior experience.</div></li>
+          <li><div><strong>Simple, Intuitive Layout</strong> — Clear design so you focus on learning, not decoding.</div></li>
+          <li><div><strong>Instant Access After Purchase</strong> — Download immediately, no waiting.</div></li>
+          <li><div><strong>PDF Digital Download</strong> — Works on any device, phone, tablet, or computer.</div></li>
           <li><div><strong>PLR &amp; MRR License</strong> — Resell as your own and keep 100% of the profits.</div></li>
         </ul>
         <div class="details-box">
@@ -245,7 +290,8 @@
             <span>Format — PDF</span>
             <span>Pages — 47</span>
             <span>Type — Digital Download</span>
-            <span>Delivery — Instant after purchase</span>
+            <span>Level — Beginner</span>
+            <span>Access — Instant</span>
             <span>License — PLR / MRR Included</span>
           </p>
         </div>
@@ -253,20 +299,50 @@
     </div>
   </section>
 
+  <!-- PERFECT FOR -->
+  <section class="section">
+    <div class="container">
+      <p class="section__tag">Perfect For</p>
+      <h2 class="section__title">Is This Guide For You?</h2>
+      <p class="section__sub">This manual was built for anyone who wants to turn braiding into a real skill.</p>
+      <div class="for-grid">
+        <div class="for-item">✓ Beginners who want to learn how to braid</div>
+        <div class="for-item">✓ Beauty and hairstyling students</div>
+        <div class="for-item">✓ Aspiring hairstylists developing new skills</div>
+        <div class="for-item">✓ Anyone who wants to turn a passion into a concrete skill</div>
+        <div class="for-item">✓ People interested in the beauty and haircare industry</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHY DIFFERENT -->
+  <section class="section section--alt">
+    <div class="container">
+      <p class="section__tag">Why This Guide Is Different</p>
+      <h2 class="section__title">Most tutorials show you the result. This guide teaches you the process.</h2>
+      <div class="why-block">
+        <p>Instead of searching through dozens of videos that skip the important steps, you get a structured path that helps you build a solid foundation — and develop your skills with greater confidence.</p>
+        <p>No scattered information. No missing pieces. Just a clear, complete system from page one to the last practice exercise.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- BONUSES -->
   <section class="section">
     <div class="container">
-      <div style="text-align:center;margin-bottom:32px"><span class="bonus-label">🎁 FREE Bonuses — Included Today Only</span></div>
+      <div style="text-align:center;margin-bottom:32px"><span class="bonus-label">🎁 FREE Bonuses — Included With Every Purchase</span></div>
       <p class="section__tag">Exclusive Bonuses</p>
-      <h2 class="section__title">Three Business-Ready Templates — On Us</h2>
+      <h2 class="section__title">Three Professional Templates — Included Free</h2>
       <p class="section__sub">Go from student to professional from day one.</p>
       <div class="bonus-img">
         <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194124_dc8f311d-603b-433c-8286-2279a6e61eb3.jpeg" alt="Bonus business templates" />
       </div>
       <div class="bonus-grid">
-        <div class="bonus-card"><div class="bonus-card__icon">📋</div><div class="bonus-card__title">Client Consultation Form</div><p class="bonus-card__desc">Understand your clients' needs before every appointment — like a pro.</p></div>
-        <div class="bonus-card"><div class="bonus-card__icon">💲</div><div class="bonus-card__title">Hair Service Price List</div><p class="bonus-card__desc">Set your rates with confidence using a polished, customizable template.</p></div>
-        <div class="bonus-card"><div class="bonus-card__icon">📅</div><div class="bonus-card__title">Appointment Card Template</div><p class="bonus-card__desc">Keep bookings organized and look established from your very first client.</p></div>
+        <div class="bonus-card"><div class="bonus-card__icon">📋</div><div class="bonus-card__title">Client Consultation Form</div><p class="bonus-card__desc">A professional form to collect client information before every appointment.</p></div>
+        <div class="bonus-card"><div class="bonus-card__icon">💲</div><div class="bonus-card__title">Hair Service Price List Template</div><p class="bonus-card__desc">A ready-to-use template to build your professional service price list.</p></div>
+        <div class="bonus-card"><div class="bonus-card__icon">📅</div><div class="bonus-card__title">Appointment Card</div><p class="bonus-card__desc">A professional appointment card to use with your clients from day one.</p></div>
       </div>
     </div>
   </section>
@@ -336,22 +412,38 @@
     </div>
   </section>
 
+  <!-- INSTANT DOWNLOAD SECTION -->
+  <section class="section section--alt">
+    <div class="container" style="text-align:center">
+      <p class="section__tag">Instant Download</p>
+      <h2 class="section__title">Start Learning In the Next 60 Seconds</h2>
+      <div class="download-block">
+        <p>After your purchase you will immediately receive the PDF file and can start studying whenever you want — directly from your phone, tablet, or computer.</p>
+        <div class="download-pills">
+          <span class="download-pill">No shipping</span>
+          <span class="download-pill">No waiting</span>
+          <span class="download-pill">Immediate access</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- FINAL CTA -->
   <section class="cta" id="buy">
     <div class="container">
-      <p class="cta__tag">✦ Limited Launch Price ✦</p>
-      <h2 class="cta__title">Your Braiding Journey Starts Today</h2>
-      <p class="cta__sub">47-page training manual + 3 business templates + full PLR/MRR rights — all for less than a coffee.</p>
+      <p class="cta__tag">✦ Start Your Hair Braiding Journey ✦</p>
+      <h2 class="cta__title">Build a Real Skill. Starting Today.</h2>
+      <p class="cta__sub">Acquire a practical skill, improve your techniques, and build the foundation to create increasingly professional braids.</p>
       <div class="cta__price">
         <span class="cta__was">{{ current_variant.compare_at_price | money }}</span>
         <span class="cta__now">{{ current_variant.price | money }}</span>
       </div>
-      <a href="{{ buy_url }}" class="btn-primary">Get Instant Access Now →</a>
+      <a href="{{ buy_url }}" class="btn-primary">Download Your Hair Braiding Manual Now →</a>
       <div class="cta__perks">
         <span class="cta__perk">Instant PDF Download</span>
         <span class="cta__perk">PLR &amp; MRR Included</span>
-        <span class="cta__perk">3 Free Templates</span>
-        <span class="cta__perk">Any Device</span>
+        <span class="cta__perk">3 Free Business Templates</span>
+        <span class="cta__perk">Works on Any Device</span>
       </div>
     </div>
   </section>
