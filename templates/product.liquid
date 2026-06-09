@@ -36,14 +36,16 @@
     .hero__title{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;color:var(--dark);max-width:760px;margin:0 auto 20px}
     .hero__title em{color:var(--terracotta);font-style:italic}
     .hero__sub{font-size:1.05rem;color:var(--mid);max-width:520px;margin:0 auto 36px;font-weight:300}
-    .hero__price{display:inline-flex;flex-direction:column;align-items:center;gap:4px;margin-bottom:32px}
-    .hero__price-was{font-size:.95rem;color:var(--soft);text-decoration:line-through}
-    .hero__price-now{font-family:'Cormorant Garamond',serif;font-size:3.4rem;font-weight:700;color:var(--dark);line-height:1}
-    .hero__price-tag{font-size:.68rem;color:var(--terracotta);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
-    .btn-primary{display:inline-block;background:var(--terracotta);color:#fff;padding:16px 48px;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:2px;transition:background .2s,transform .15s;border:none;cursor:pointer}
-    .btn-primary:hover{background:#b05e3a;transform:translateY(-1px)}
+    .hero__price-card{background:#fff;border:1px solid #EDE3D8;border-radius:12px;padding:28px 36px;margin-bottom:28px;display:inline-block;min-width:320px;box-shadow:0 4px 24px rgba(196,113,74,.08)}
+    .hero__price-was{display:block;font-size:.85rem;color:var(--soft);text-decoration:line-through;letter-spacing:.04em;margin-bottom:6px}
+    .hero__price-row{display:flex;align-items:baseline;justify-content:center;gap:14px;margin-bottom:10px}
+    .hero__price-now{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:700;color:var(--dark);line-height:1}
+    .hero__price-save{background:var(--terracotta);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;align-self:center}
+    .hero__price-tag{display:block;font-size:.7rem;color:var(--terracotta);font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid #EDE3D8;padding-top:12px;margin-top:4px}
+    .btn-primary{display:inline-block;background:var(--terracotta);color:#fff;padding:18px 56px;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(196,113,74,.35)}
+    .btn-primary:hover{background:#b05e3a;transform:translateY(-2px);box-shadow:0 6px 22px rgba(196,113,74,.45)}
     .hero__lock{font-size:.75rem;color:var(--soft);margin-top:14px;display:flex;align-items:center;justify-content:center;gap:6px}
-    .hero__badges{display:flex;justify-content:center;gap:28px;margin-top:50px;flex-wrap:wrap}
+    .hero__badges{display:flex;justify-content:center;gap:28px;margin-top:48px;flex-wrap:wrap}
     .badge{display:flex;flex-direction:column;align-items:center;gap:5px}
     .badge__icon{width:38px;height:38px;border-radius:50%;background:var(--gold-light);display:flex;align-items:center;justify-content:center;font-size:1rem}
     .badge__label{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid)}
@@ -208,9 +210,12 @@
         <p class="hero__pain-close"><strong>If any of this sounds like you — this guide was made for you.</strong></p>
       </div>
 
-      <div class="hero__price">
+      <div class="hero__price-card">
         <span class="hero__price-was">Regular Price: {{ current_variant.compare_at_price | money }}</span>
-        <span class="hero__price-now">{{ current_variant.price | money }}</span>
+        <div class="hero__price-row">
+          <span class="hero__price-now">{{ current_variant.price | money }}</span>
+          <span class="hero__price-save">Save 90%</span>
+        </div>
         <span class="hero__price-tag">Limited Launch Price — Instant Download</span>
       </div>
       <a href="{{ buy_url }}" class="btn-primary">Yes, I Want This Guide →</a>
@@ -371,7 +376,7 @@
         </div>
         <div class="testi-card">
           <div class="testi-card__stars">★★★★★</div>
-          <p class="testi-card__text">"I bought this for the PLR rights and ended up reading the whole thing. The quality is impressive for the price. Resold it twice already."</p>
+          <p class="testi-card__text">"I bought this on a whim and ended up reading the whole thing in one sitting. The quality is impressive and the step-by-step photos make everything so clear."</p>
           <div class="testi-card__author">
             <div class="testi-card__avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194125_53358569-ddb9-4a2b-842e-25ac37fc2b64.png" alt="Aaliyah K." /></div>
             <div><div class="testi-card__name">Aaliyah K.</div><div class="testi-card__role">Digital Entrepreneur, Chicago</div></div>
@@ -391,7 +396,7 @@
         <div class="faq-item"><button class="faq-q">Do I need any experience to use this guide?<span class="faq-icon">+</span></button><div class="faq-a">Not at all. This manual was built specifically for complete beginners — simple, jargon-free language from start to finish.</div></div>
         <div class="faq-item"><button class="faq-q">How do I receive my download after purchase?<span class="faq-icon">+</span></button><div class="faq-a">Instantly. As soon as your payment is confirmed, you'll receive an email with a direct download link. No waiting, no shipping.</div></div>
         <div class="faq-item"><button class="faq-q">What does PLR / MRR mean exactly?<span class="faq-icon">+</span></button><div class="faq-a">PLR = Private Label Rights (rebrand as your own). MRR = Master Resell Rights (sell to others and keep 100% of revenue). Buy once, income stream forever.</div></div>
-        <div class="faq-item"><button class="faq-q">Can I resell this guide and keep all the money?<span class="faq-icon">+</span></button><div class="faq-a">Yes. Sell at any price you choose. No royalties, no revenue sharing. Every dollar from your sales is yours.</div></div>
+        <div class="faq-item"><button class="faq-q">Can I use this guide even if I have zero experience?<span class="faq-icon">+</span></button><div class="faq-a">Absolutely. The guide starts from the very basics — anatomy of the braid, tool selection, tension control — and builds up progressively. No prior experience needed.</div></div>
         <div class="faq-item"><button class="faq-q">What format is the guide in?<span class="faq-icon">+</span></button><div class="faq-a">47-page PDF — works on any device. Read on screen or print it out.</div></div>
         <div class="faq-item"><button class="faq-q">Is there a refund policy?<span class="faq-icon">+</span></button><div class="faq-a">Because this is a digital product with instant access, all sales are final. Issues accessing your files? Contact our support and we'll make it right.</div></div>
       </div>
