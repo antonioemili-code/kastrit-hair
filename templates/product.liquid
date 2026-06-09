@@ -131,6 +131,24 @@
 
     .divider{height:1px;background:var(--border);max-width:70px;margin:0 auto}
 
+    /* HERO MOCKUP */
+    .hero__mockup{margin-top:48px;max-width:320px;margin-left:auto;margin-right:auto;filter:drop-shadow(0 20px 40px rgba(30,21,18,.15))}
+    .hero__mockup img{width:100%;border-radius:4px}
+
+    /* SALON BANNER */
+    .salon-banner{position:relative;max-height:420px;overflow:hidden}
+    .salon-banner img{width:100%;height:420px;object-fit:cover;object-position:center top;display:block}
+    .salon-banner__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,21,18,.65) 0%,transparent 60%);display:flex;align-items:flex-end;justify-content:center;padding:40px 24px}
+    .salon-banner__text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-style:italic;color:#fff;text-align:center;max-width:600px}
+
+    /* BONUS IMAGE */
+    .bonus-img{margin-bottom:40px;border-radius:8px;overflow:hidden;max-height:340px}
+    .bonus-img img{width:100%;height:340px;object-fit:cover;object-position:center;display:block}
+
+    /* TESTI AVATAR WITH PHOTO */
+    .testi-card__avatar{width:42px;height:42px;border-radius:50%;overflow:hidden;flex-shrink:0}
+    .testi-card__avatar img{width:100%;height:100%;object-fit:cover}
+
     @media(max-width:600px){
       .hero{padding:56px 18px 52px}
       .section{padding:60px 18px}
@@ -172,8 +190,20 @@
         <div class="badge"><div class="badge__icon">🎁</div><span class="badge__label">3 Free Bonuses</span></div>
         <div class="badge"><div class="badge__icon">🔁</div><span class="badge__label">PLR / MRR Rights</span></div>
       </div>
+
+      <div class="hero__mockup">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194121_d3b873f5-5fc1-4020-abd2-5beeaf109a56.png" alt="Hair Braiding Training Manual" />
+      </div>
     </div>
   </section>
+
+  <!-- SALON BANNER -->
+  <div class="salon-banner">
+    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194122_34b5e22f-8d83-4752-a315-24d62b8e7611.png" alt="Hair braiding salon" />
+    <div class="salon-banner__overlay">
+      <p class="salon-banner__text">"The skill that starts with a guide — the career that lasts a lifetime."</p>
+    </div>
+  </div>
 
   <!-- WHAT YOU'LL LEARN -->
   <section class="section">
@@ -230,6 +260,9 @@
       <p class="section__tag">Exclusive Bonuses</p>
       <h2 class="section__title">Three Business-Ready Templates — On Us</h2>
       <p class="section__sub">Go from student to professional from day one.</p>
+      <div class="bonus-img">
+        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194124_dc8f311d-603b-433c-8286-2279a6e61eb3.jpeg" alt="Bonus business templates" />
+      </div>
       <div class="bonus-grid">
         <div class="bonus-card"><div class="bonus-card__icon">📋</div><div class="bonus-card__title">Client Consultation Form</div><p class="bonus-card__desc">Understand your clients' needs before every appointment — like a pro.</p></div>
         <div class="bonus-card"><div class="bonus-card__icon">💲</div><div class="bonus-card__title">Hair Service Price List</div><p class="bonus-card__desc">Set your rates with confidence using a polished, customizable template.</p></div>
@@ -261,17 +294,26 @@
         <div class="testi-card">
           <div class="testi-card__stars">★★★★★</div>
           <p class="testi-card__text">"I had zero experience before this. The step-by-step format made everything click instantly. I did my first braid the same day I downloaded it."</p>
-          <div class="testi-card__author"><div class="testi-card__avatar">J</div><div><div class="testi-card__name">Jessica M.</div><div class="testi-card__role">Beauty Student, Atlanta</div></div></div>
+          <div class="testi-card__author">
+            <div class="testi-card__avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194125_5ffa67e7-36c0-4502-b2ff-297c68800a8c.png" alt="Jessica M." /></div>
+            <div><div class="testi-card__name">Jessica M.</div><div class="testi-card__role">Beauty Student, Atlanta</div></div>
+          </div>
         </div>
         <div class="testi-card">
           <div class="testi-card__stars">★★★★★</div>
           <p class="testi-card__text">"The bonuses alone are worth it. I used the consultation form in my first week. It made me look so much more professional to clients."</p>
-          <div class="testi-card__author"><div class="testi-card__avatar">T</div><div><div class="testi-card__name">Tanya R.</div><div class="testi-card__role">Freelance Hairstylist, Houston</div></div></div>
+          <div class="testi-card__author">
+            <div class="testi-card__avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194125_173856c6-43b0-4807-a57f-05817d96de54.png" alt="Tanya R." /></div>
+            <div><div class="testi-card__name">Tanya R.</div><div class="testi-card__role">Freelance Hairstylist, Houston</div></div>
+          </div>
         </div>
         <div class="testi-card">
           <div class="testi-card__stars">★★★★★</div>
           <p class="testi-card__text">"I bought this for the PLR rights and ended up reading the whole thing. The quality is impressive for the price. Resold it twice already."</p>
-          <div class="testi-card__author"><div class="testi-card__avatar">A</div><div><div class="testi-card__name">Aaliyah K.</div><div class="testi-card__role">Digital Entrepreneur, Chicago</div></div></div>
+          <div class="testi-card__author">
+            <div class="testi-card__avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194125_53358569-ddb9-4a2b-842e-25ac37fc2b64.png" alt="Aaliyah K." /></div>
+            <div><div class="testi-card__name">Aaliyah K.</div><div class="testi-card__role">Digital Entrepreneur, Chicago</div></div>
+          </div>
         </div>
       </div>
     </div>
