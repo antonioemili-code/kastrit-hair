@@ -35,18 +35,12 @@
 
     /* ── NAV ── */
     .nav{
-      background:transparent;
-      border-bottom:1px solid transparent;
-      padding:18px 20px;
-      position:sticky;top:0;z-index:200;
-      transition:background .4s,border-color .4s,padding .4s,box-shadow .4s;
-    }
-    .nav.scrolled{
       background:rgba(255,253,249,.96);
-      border-bottom-color:var(--border);
-      padding:12px 20px;
-      box-shadow:0 2px 20px rgba(26,16,13,.06);
+      border-bottom:1px solid var(--border);
+      padding:14px 20px;
+      position:sticky;top:0;z-index:200;
       backdrop-filter:blur(12px);
+      box-shadow:0 2px 20px rgba(26,16,13,.06);
     }
     .nav__inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
     .nav__logo{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;letter-spacing:.12em;color:var(--dark);text-transform:uppercase;flex-shrink:0}
@@ -294,12 +288,6 @@
       .hero__badges{max-width:220px}
     }
 
-    /* Reduce motion */
-    @media(prefers-reduced-motion:reduce){
-      .reveal,.split-word span{transition:none}
-      .hero__price-card::after,.btn-primary,.cta__btn{animation:none}
-      .learn-card,.bonus-card,.testi-card{transition:none}
-    }
   </style>
 </head>
 <body>
@@ -602,35 +590,10 @@
       });
     })();
 
-    /* ── 3. PRICE COUNTER ($97 → $9.99) ── */
-    (function() {
-      const el = document.getElementById('priceDisplay');
-      if (!el) return;
-      let started = false;
-      const obs = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting && !started) {
-          started = true;
-          obs.disconnect();
-          const start = 97, end = 9.99, duration = 1200;
-          const startTime = performance.now();
-          function tick(now) {
-            const p = Math.min((now - startTime) / duration, 1);
-            const ease = 1 - Math.pow(1 - p, 3);
-            const val = start + (end - start) * ease;
-            el.textContent = '$' + val.toFixed(2);
-            if (p < 1) requestAnimationFrame(tick);
-            else el.textContent = '$9.99';
-          }
-          requestAnimationFrame(tick);
-        }
-      }, { threshold: 0.5 });
-      obs.observe(el);
-    })();
-
     /* ── 4. PARALLAX (salon banner) ── */
     (function() {
       const img = document.getElementById('parallaxImg');
-      if (!img || window.matchMedia('(max-width:600px)').matches) return;
+      if (!img) return;
       function onScroll() {
         const banner = img.closest('.salon-banner');
         const rect = banner.getBoundingClientRect();
@@ -669,17 +632,7 @@
       });
     });
 
-    /* ── 7. NAV scroll style ── */
-    (function() {
-      const nav = document.getElementById('mainNav');
-      function update() {
-        nav.classList.toggle('scrolled', window.scrollY > 40);
-      }
-      window.addEventListener('scroll', update, { passive: true });
-      update();
-    })();
-
-    /* ── 8. STICKY BAR hide on CTA ── */
+    /* ── 7. STICKY BAR hide on CTA ── */
     (function() {
       const buySection = document.getElementById('buy');
       const stickyBar = document.getElementById('stickyBar');
