@@ -606,31 +606,35 @@
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
-    /* ── 5. MAGNETIC BUTTON ── */
-    document.querySelectorAll('.btn-primary, .cta__btn, .nav__cta').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const r = btn.getBoundingClientRect();
-        const x = e.clientX - r.left - r.width / 2;
-        const y = e.clientY - r.top - r.height / 2;
-        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+    /* ── 5. MAGNETIC BUTTON (desktop only) ── */
+    if (!window.matchMedia('(hover: none)').matches) {
+      document.querySelectorAll('.btn-primary, .cta__btn, .nav__cta').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const r = btn.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2;
+          const y = e.clientY - r.top - r.height / 2;
+          btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+        });
+        btn.addEventListener('mouseleave', () => {
+          btn.style.transform = '';
+        });
       });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
-      });
-    });
+    }
 
-    /* ── 6. CARD TILT 3D ── */
-    document.querySelectorAll('.learn-card, .bonus-card, .testi-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width - 0.5;
-        const y = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateZ(4px)`;
+    /* ── 6. CARD TILT 3D (desktop only) ── */
+    if (!window.matchMedia('(hover: none)').matches) {
+      document.querySelectorAll('.learn-card, .bonus-card, .testi-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const x = (e.clientX - r.left) / r.width - 0.5;
+          const y = (e.clientY - r.top) / r.height - 0.5;
+          card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateZ(4px)`;
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
       });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
+    }
 
     /* ── 7. STICKY BAR hide on CTA ── */
     (function() {
