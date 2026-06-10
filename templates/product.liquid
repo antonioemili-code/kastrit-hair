@@ -655,29 +655,42 @@
 
     /* ── MOBILE A: SECTION COLOR SHIFT ── */
     (function() {
-      const sections = document.querySelectorAll('.section, .hero, .cta');
+      const sections = Array.from(document.querySelectorAll('.hero, .section, .cta'));
       const palette = [
-        '#FAF6F1', // cream
-        '#FFFDF9', // warm white
-        '#F5ECD9', // gold pale
         '#FAF6F1',
-        '#FFF8F3', // peach tint
+        '#FFFDF9',
+        '#F5ECD9',
         '#FAF6F1',
-        '#F7F0E8', // sand
+        '#FFF8F3',
+        '#FFFDF9',
+        '#F7F0E8',
+        '#FFFDF9',
+        '#FAF6F1',
         '#FFFDF9',
         '#FAF6F1',
       ];
-      let current = 0;
-      const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            const idx = Array.from(sections).indexOf(e.target) % palette.length;
-            document.body.style.transition = 'background-color .8s cubic-bezier(.22,1,.36,1)';
-            document.body.style.backgroundColor = palette[idx];
-          }
+      document.body.style.transition = 'background-color 1s cubic-bezier(.22,1,.36,1)';
+      let activeIdx = -1;
+      let ticking = false;
+      function update() {
+        const mid = window.innerHeight / 2;
+        let closest = 0, minDist = Infinity;
+        sections.forEach((s, i) => {
+          const r = s.getBoundingClientRect();
+          const center = r.top + r.height / 2;
+          const dist = Math.abs(center - mid);
+          if (dist < minDist) { minDist = dist; closest = i; }
         });
-      }, { threshold: 0.4 });
-      sections.forEach(s => obs.observe(s));
+        if (closest !== activeIdx) {
+          activeIdx = closest;
+          document.body.style.backgroundColor = palette[closest % palette.length];
+        }
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      }, { passive: true });
+      update();
     })();
 
     /* ── MOBILE B: SCROLL PROGRESS BAR ── */
