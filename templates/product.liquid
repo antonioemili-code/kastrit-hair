@@ -11,174 +11,215 @@
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
-      --cream:#FAF6F1;--warm-white:#FFFDF9;--gold:#C9A96E;--gold-light:#E8D5B0;
-      --terracotta:#C4714A;--dark:#1E1512;--mid:#6B5B52;--soft:#A89080;--border:#EDE3D8;
+      --cream:#FAF6F1;
+      --warm-white:#FFFDF9;
+      --gold:#C9A96E;
+      --gold-light:#E8D5B0;
+      --gold-pale:#F5ECD9;
+      --terracotta:#C4714A;
+      --terra-dark:#A85B38;
+      --dark:#1A100D;
+      --mid:#6B5B52;
+      --soft:#A89080;
+      --border:#EAE0D4;
+      --card-shadow:0 2px 20px rgba(30,21,18,.07);
+      --card-shadow-hover:0 8px 32px rgba(30,21,18,.13);
     }
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
     body{font-family:'Inter',sans-serif;background:var(--warm-white);color:var(--dark);line-height:1.6;overflow-x:hidden}
-    h1,h2,h3{font-family:'Cormorant Garamond',serif;line-height:1.15}
+    h1,h2,h3{font-family:'Cormorant Garamond',serif;line-height:1.12}
     img{max-width:100%;display:block}
     a{text-decoration:none}
-    .container{max-width:900px;margin:0 auto;padding:0 24px}
-    .container--wide{max-width:1100px;margin:0 auto;padding:0 24px}
+    .container{max-width:860px;margin:0 auto;padding:0 20px}
+    .container--wide{max-width:1080px;margin:0 auto;padding:0 20px}
 
-    /* NAV */
-    .nav{background:var(--warm-white);border-bottom:1px solid var(--border);padding:16px 24px;position:sticky;top:0;z-index:100}
-    .nav__inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-    .nav__logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;letter-spacing:.1em;color:var(--dark);text-transform:uppercase}
-    .nav__cta{background:var(--dark);color:#fff;padding:9px 20px;border-radius:2px;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background .2s}
+    /* ── NAV ── */
+    .nav{background:var(--warm-white);border-bottom:1px solid var(--border);padding:14px 20px;position:sticky;top:0;z-index:200;backdrop-filter:blur(10px)}
+    .nav__inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .nav__logo{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;letter-spacing:.12em;color:var(--dark);text-transform:uppercase;flex-shrink:0}
+    .nav__cta{background:var(--dark);color:#fff;padding:9px 22px;border-radius:3px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;white-space:nowrap;flex-shrink:0}
     .nav__cta:hover{background:var(--terracotta)}
 
-    /* HERO */
-    .hero{background:var(--cream);padding:80px 24px 70px;text-align:center;position:relative;overflow:hidden}
-    .hero::before{content:'';position:absolute;top:-100px;right:-100px;width:380px;height:380px;border-radius:50%;background:var(--gold-light);opacity:.2;pointer-events:none}
-    .hero__tag{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta);margin-bottom:18px}
-    .hero__title{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;color:var(--dark);max-width:760px;margin:0 auto 20px}
+    /* ── HERO ── */
+    .hero{background:var(--cream);padding:56px 20px 64px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:var(--gold-pale);opacity:.5;pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:240px;height:240px;border-radius:50%;background:var(--gold-pale);opacity:.35;pointer-events:none}
+    .hero__tag{display:inline-block;font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:16px;position:relative}
+    .hero__title{font-size:clamp(2rem,7vw,3.8rem);font-weight:700;color:var(--dark);max-width:720px;margin:0 auto 18px;position:relative}
     .hero__title em{color:var(--terracotta);font-style:italic}
-    .hero__sub{font-size:1.05rem;color:var(--mid);max-width:520px;margin:0 auto 36px;font-weight:300}
-    .hero__price-card{background:#fff;border:1px solid #EDE3D8;border-radius:12px;padding:28px 36px;margin-bottom:28px;display:inline-block;min-width:320px;box-shadow:0 4px 24px rgba(196,113,74,.08)}
-    .hero__price-was{display:block;font-size:.85rem;color:var(--soft);text-decoration:line-through;letter-spacing:.04em;margin-bottom:6px}
-    .hero__price-row{display:flex;align-items:baseline;justify-content:center;gap:14px;margin-bottom:10px}
-    .hero__price-now{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:700;color:var(--dark);line-height:1}
-    .hero__price-save{background:var(--terracotta);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;align-self:center}
-    .hero__price-tag{display:block;font-size:.7rem;color:var(--terracotta);font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid #EDE3D8;padding-top:12px;margin-top:4px}
-    .btn-primary{display:inline-block;background:var(--terracotta);color:#fff;padding:18px 56px;font-size:.85rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;border:none;cursor:pointer;box-shadow:0 4px 16px rgba(196,113,74,.35)}
-    .btn-primary:hover{background:#b05e3a;transform:translateY(-2px);box-shadow:0 6px 22px rgba(196,113,74,.45)}
-    .hero__lock{font-size:.75rem;color:var(--soft);margin-top:14px;display:flex;align-items:center;justify-content:center;gap:6px}
-    .hero__badges{display:flex;justify-content:center;gap:28px;margin-top:48px;flex-wrap:wrap}
-    .badge{display:flex;flex-direction:column;align-items:center;gap:5px}
-    .badge__icon{width:38px;height:38px;border-radius:50%;background:var(--gold-light);display:flex;align-items:center;justify-content:center;font-size:1rem}
-    .badge__label{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid)}
+    .hero__sub{font-size:1rem;color:var(--mid);max-width:500px;margin:0 auto 32px;font-weight:300;line-height:1.7;position:relative}
 
-    /* SECTIONS */
-    .section{padding:80px 24px}
+    /* Pain block */
+    .hero__pain{max-width:520px;margin:0 auto 36px;text-align:left;position:relative}
+    .hero__pain p{font-size:.92rem;color:var(--mid);margin-bottom:10px;padding:10px 14px;background:rgba(255,255,255,.6);border-left:2px solid var(--gold-light);border-radius:0 4px 4px 0}
+    .hero__pain-close{background:rgba(196,113,74,.06)!important;border-left-color:var(--terracotta)!important;color:var(--dark)!important;font-size:.95rem!important}
+
+    /* Mockup */
+    .hero__mockup{margin:40px auto 0;max-width:280px;position:relative;z-index:1}
+    .hero__mockup img{width:100%;border-radius:8px;box-shadow:0 24px 60px rgba(30,21,18,.18),0 8px 20px rgba(30,21,18,.1)}
+
+    /* Price card */
+    .hero__price-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 28px;margin:32px auto 0;display:block;width:100%;max-width:340px;box-shadow:var(--card-shadow);position:relative;z-index:1}
+    .hero__price-was{display:block;font-size:.82rem;color:var(--soft);text-decoration:line-through;letter-spacing:.04em;margin-bottom:6px}
+    .hero__price-row{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:10px}
+    .hero__price-now{font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:700;color:var(--dark);line-height:1}
+    .hero__price-save{background:var(--terracotta);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;align-self:center;flex-shrink:0}
+    .hero__price-tag{display:block;font-size:.67rem;color:var(--terracotta);font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--border);padding-top:12px;margin-top:2px}
+
+    /* CTA button */
+    .btn-primary{display:block;width:100%;max-width:340px;margin:16px auto 0;background:var(--terracotta);color:#fff;padding:17px 32px;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;border:none;cursor:pointer;text-align:center;box-shadow:0 4px 18px rgba(196,113,74,.38)}
+    .btn-primary:hover{background:var(--terra-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,113,74,.45)}
+    .hero__lock{font-size:.73rem;color:var(--soft);margin-top:12px;display:flex;align-items:center;justify-content:center;gap:5px}
+
+    /* Badges */
+    .hero__badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:40px;max-width:360px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+    .badge{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;background:#fff;border:1px solid var(--border);border-radius:10px}
+    .badge__icon{width:34px;height:34px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;font-size:.95rem}
+    .badge__label{font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mid);text-align:center;line-height:1.3}
+
+    /* ── SECTIONS ── */
+    .section{padding:72px 20px}
     .section--alt{background:var(--cream)}
-    .section__tag{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;text-align:center}
-    .section__title{font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;color:var(--dark);text-align:center;max-width:620px;margin:0 auto 12px}
-    .section__sub{font-size:.95rem;color:var(--mid);text-align:center;max-width:500px;margin:0 auto 52px;font-weight:300}
+    .section__tag{font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;text-align:center;display:block}
+    .section__title{font-size:clamp(1.75rem,4.5vw,2.6rem);font-weight:700;color:var(--dark);text-align:center;max-width:580px;margin:0 auto 10px}
+    .section__sub{font-size:.92rem;color:var(--mid);text-align:center;max-width:480px;margin:0 auto 48px;font-weight:300;line-height:1.75}
+
+    /* SALON BANNER */
+    .salon-banner{position:relative;height:380px;overflow:hidden}
+    .salon-banner img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+    .salon-banner__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,16,13,.7) 0%,rgba(26,16,13,.1) 60%);display:flex;align-items:flex-end;justify-content:center;padding:36px 24px}
+    .salon-banner__text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.65rem);font-style:italic;color:#fff;text-align:center;max-width:580px;line-height:1.45}
+
+    /* INTRO */
+    .intro-block{max-width:580px;margin:24px auto 0;display:flex;flex-direction:column;gap:12px}
+    .intro-block p{font-size:.97rem;color:var(--mid);text-align:center;font-weight:300;line-height:1.75}
 
     /* LEARN GRID */
-    .learn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
-    .learn-card{background:var(--warm-white);border:1px solid var(--border);border-radius:4px;padding:28px 24px;transition:border-color .2s,transform .2s}
-    .learn-card:hover{border-color:var(--gold);transform:translateY(-2px)}
-    .learn-card__num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:700;color:var(--gold-light);line-height:1;margin-bottom:10px}
-    .learn-card__title{font-size:1rem;font-weight:600;color:var(--dark);margin-bottom:6px}
-    .learn-card__desc{font-size:.84rem;color:var(--mid);line-height:1.6}
+    .learn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .learn-card{background:var(--warm-white);border:1px solid var(--border);border-radius:10px;padding:26px 22px;transition:border-color .2s,box-shadow .2s,transform .2s;box-shadow:var(--card-shadow)}
+    .learn-card:hover{border-color:var(--gold);box-shadow:var(--card-shadow-hover);transform:translateY(-3px)}
+    .learn-card__num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold-light);line-height:1;margin-bottom:10px}
+    .learn-card__title{font-size:.97rem;font-weight:600;color:var(--dark);margin-bottom:6px}
+    .learn-card__desc{font-size:.83rem;color:var(--mid);line-height:1.65}
 
     /* INCLUDED */
-    .included-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
-    @media(max-width:680px){.included-grid{grid-template-columns:1fr;gap:36px}}
-    .check-list{list-style:none;display:flex;flex-direction:column;gap:16px}
-    .check-list li{display:flex;align-items:flex-start;gap:12px;font-size:.92rem;color:var(--mid)}
-    .check-list li::before{content:'✦';color:var(--gold);font-size:.65rem;margin-top:4px;flex-shrink:0}
+    .included-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+    .check-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+    .check-list li{display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--mid)}
+    .check-list li::before{content:'✦';color:var(--gold);font-size:.6rem;margin-top:5px;flex-shrink:0}
     .check-list li strong{color:var(--dark);font-weight:600}
-    .details-box{background:var(--dark);color:#fff;border-radius:4px;padding:36px 32px}
-    .details-box__tag{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
-    .details-box__title{font-size:1.75rem;font-weight:700;margin-bottom:20px}
-    .details-box__list{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.9}
-    .details-box__list span{display:block}
+    .details-box{background:var(--dark);color:#fff;border-radius:12px;padding:32px 28px;box-shadow:0 8px 32px rgba(26,16,13,.25)}
+    .details-box__tag{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px;display:block}
+    .details-box__title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;margin-bottom:20px;line-height:1.2}
+    .details-box__list{font-size:.82rem;color:rgba(255,255,255,.5);line-height:2}
+    .details-box__list span{display:flex;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:2px}
+    .details-box__list span:last-child{border-bottom:none}
+
+    /* PERFECT FOR */
+    .for-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;max-width:760px;margin:0 auto}
+    .for-item{background:var(--warm-white);border:1px solid var(--border);border-radius:8px;padding:16px 20px;font-size:.88rem;color:var(--dark);font-weight:500;display:flex;align-items:center;gap:10px}
+    .for-item::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+
+    /* WHY DIFFERENT */
+    .why-block{max-width:600px;margin:24px auto 0;display:flex;flex-direction:column;gap:14px}
+    .why-block p{font-size:.97rem;color:var(--mid);font-weight:300;line-height:1.85}
 
     /* BONUS */
-    .bonus-label{display:inline-block;background:var(--terracotta);color:#fff;font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:32px}
-    .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    @media(max-width:680px){.bonus-grid{grid-template-columns:1fr}}
-    .bonus-card{border:1px solid var(--border);border-radius:4px;padding:24px 20px;text-align:center;background:var(--warm-white)}
-    .bonus-card__icon{font-size:1.8rem;margin-bottom:12px}
-    .bonus-card__title{font-size:.95rem;font-weight:600;color:var(--dark);margin-bottom:6px}
-    .bonus-card__desc{font-size:.8rem;color:var(--mid)}
-
-    /* PLR BANNER */
-    .plr{background:linear-gradient(135deg,var(--dark) 0%,#3a2a22 100%);color:#fff;padding:64px 24px;text-align:center}
-    .plr__tag{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:14px}
-    .plr__title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;max-width:620px;margin:0 auto 14px}
-    .plr__sub{font-size:.95rem;color:rgba(255,255,255,.6);max-width:500px;margin:0 auto 36px;font-weight:300}
-    .plr-pills{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-    .plr-pill{border:1px solid rgba(201,169,110,.35);color:var(--gold-light);padding:7px 18px;border-radius:100px;font-size:.77rem;font-weight:500}
+    .bonus-label{display:inline-block;background:var(--terracotta);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 14px;border-radius:2px;margin-bottom:28px}
+    .bonus-img{margin-bottom:36px;border-radius:12px;overflow:hidden;height:300px;box-shadow:var(--card-shadow-hover)}
+    .bonus-img img{width:100%;height:100%;object-fit:cover;object-position:center}
+    .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .bonus-card{border:1px solid var(--border);border-radius:10px;padding:22px 18px;text-align:center;background:var(--warm-white);box-shadow:var(--card-shadow)}
+    .bonus-card__icon{font-size:1.6rem;margin-bottom:10px}
+    .bonus-card__title{font-size:.92rem;font-weight:600;color:var(--dark);margin-bottom:6px}
+    .bonus-card__desc{font-size:.78rem;color:var(--mid);line-height:1.6}
 
     /* TESTIMONIALS */
-    .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-    .testi-card{background:var(--warm-white);border:1px solid var(--border);border-radius:4px;padding:28px 24px}
-    .testi-card__stars{color:var(--gold);font-size:.82rem;letter-spacing:2px;margin-bottom:14px}
-    .testi-card__text{font-size:.9rem;color:var(--mid);line-height:1.7;margin-bottom:20px;font-style:italic}
+    .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .testi-card{background:var(--warm-white);border:1px solid var(--border);border-radius:12px;padding:26px 22px;box-shadow:var(--card-shadow)}
+    .testi-card__stars{color:var(--gold);font-size:.8rem;letter-spacing:2px;margin-bottom:14px}
+    .testi-card__text{font-size:.88rem;color:var(--mid);line-height:1.75;margin-bottom:20px;font-style:italic}
     .testi-card__author{display:flex;align-items:center;gap:10px}
-    .testi-card__avatar{width:38px;height:38px;border-radius:50%;background:var(--gold-light);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:var(--dark)}
-    .testi-card__name{font-weight:600;font-size:.84rem;color:var(--dark)}
-    .testi-card__role{font-size:.73rem;color:var(--soft)}
+    .testi-card__avatar{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--gold-pale)}
+    .testi-card__avatar img{width:100%;height:100%;object-fit:cover}
+    .testi-card__name{font-weight:600;font-size:.83rem;color:var(--dark)}
+    .testi-card__role{font-size:.71rem;color:var(--soft)}
 
     /* FAQ */
-    .faq-list{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:2px}
-    .faq-item{border:1px solid var(--border);border-radius:4px;overflow:hidden}
-    .faq-q{width:100%;background:var(--warm-white);border:none;padding:20px 24px;text-align:left;font-family:'Inter',sans-serif;font-size:.9rem;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .15s}
+    .faq-list{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+    .faq-item{border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--warm-white)}
+    .faq-q{width:100%;background:transparent;border:none;padding:18px 22px;text-align:left;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .15s;line-height:1.4}
     .faq-q:hover{background:var(--cream)}
-    .faq-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;transition:transform .25s}
-    .faq-a{background:var(--cream);padding:0 24px;font-size:.87rem;color:var(--mid);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
-    .faq-item.open .faq-a{max-height:300px;padding:18px 24px 22px}
+    .faq-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;transition:transform .25s;line-height:1}
+    .faq-a{background:var(--cream);padding:0 22px;font-size:.85rem;color:var(--mid);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+    .faq-item.open .faq-a{max-height:300px;padding:16px 22px 20px}
     .faq-item.open .faq-icon{transform:rotate(45deg)}
 
+    /* DIVIDER */
+    .divider{height:1px;background:var(--border);max-width:60px;margin:0 auto}
+
+    /* INSTANT DOWNLOAD */
+    .download-block{max-width:500px;margin:22px auto 0}
+    .download-block p{font-size:.97rem;color:var(--mid);font-weight:300;margin-bottom:26px;line-height:1.8;text-align:center}
+    .download-pills{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+    .download-pill{background:var(--dark);color:#fff;padding:8px 20px;border-radius:100px;font-size:.76rem;font-weight:600;letter-spacing:.06em}
+
     /* FINAL CTA */
-    .cta{background:var(--cream);padding:90px 24px;text-align:center}
-    .cta__tag{font-size:.68rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:14px}
-    .cta__title{font-size:clamp(2rem,5vw,3.4rem);font-weight:700;max-width:660px;margin:0 auto 18px}
-    .cta__sub{font-size:.95rem;color:var(--mid);max-width:460px;margin:0 auto 36px;font-weight:300}
-    .cta__price{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:32px}
-    .cta__was{font-size:1.2rem;color:var(--soft);text-decoration:line-through}
-    .cta__now{font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:700;color:var(--dark);line-height:1}
-    .cta__perks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:14px}
-    .cta__perk{font-size:.73rem;color:var(--soft);font-weight:500;display:flex;align-items:center;gap:5px}
+    .cta{background:var(--cream);padding:80px 20px;text-align:center}
+    .cta__tag{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:12px;display:block}
+    .cta__title{font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;max-width:620px;margin:0 auto 16px}
+    .cta__sub{font-size:.93rem;color:var(--mid);max-width:440px;margin:0 auto 32px;font-weight:300;line-height:1.75}
+    .cta__price{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:28px}
+    .cta__was{font-size:1.15rem;color:var(--soft);text-decoration:line-through}
+    .cta__now{font-family:'Cormorant Garamond',serif;font-size:3.6rem;font-weight:700;color:var(--dark);line-height:1}
+    .cta__btn{display:block;width:100%;max-width:380px;margin:0 auto;background:var(--terracotta);color:#fff;padding:18px 32px;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;box-shadow:0 4px 18px rgba(196,113,74,.38);text-align:center}
+    .cta__btn:hover{background:var(--terra-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,113,74,.45)}
+    .cta__perks{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px}
+    .cta__perk{font-size:.71rem;color:var(--soft);font-weight:500;display:flex;align-items:center;gap:5px}
     .cta__perk::before{content:'✓';color:var(--gold);font-weight:700}
 
     /* FOOTER */
-    .footer{background:var(--dark);color:rgba(255,255,255,.4);text-align:center;padding:28px 24px;font-size:.75rem}
-    .footer a{color:rgba(255,255,255,.4);text-decoration:underline}
+    .footer{background:var(--dark);color:rgba(255,255,255,.38);text-align:center;padding:28px 20px;font-size:.73rem}
+    .footer a{color:rgba(255,255,255,.38);text-decoration:underline}
 
-    .divider{height:1px;background:var(--border);max-width:70px;margin:0 auto}
+    /* FLOATING MOBILE CTA */
+    .sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--dark);padding:12px 16px;box-shadow:0 -4px 20px rgba(0,0,0,.2)}
+    .sticky-bar__inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:480px;margin:0 auto}
+    .sticky-bar__price{display:flex;flex-direction:column}
+    .sticky-bar__was{font-size:.68rem;color:rgba(255,255,255,.4);text-decoration:line-through}
+    .sticky-bar__now{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fff;line-height:1}
+    .sticky-bar__btn{background:var(--terracotta);color:#fff;padding:11px 22px;border-radius:4px;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 10px rgba(196,113,74,.4)}
 
-    /* PAIN POINTS */
-    .hero__pain{max-width:560px;margin:0 auto 36px;text-align:left}
-    .hero__pain p{font-size:.95rem;color:var(--mid);margin-bottom:10px;padding-left:16px;border-left:2px solid var(--gold-light)}
-    .hero__pain-close{font-size:1rem!important;color:var(--dark)!important;border-left-color:var(--terracotta)!important;margin-top:18px!important}
-
-    /* INTRO BLOCK */
-    .intro-block{max-width:620px;margin:28px auto 0;display:flex;flex-direction:column;gap:14px}
-    .intro-block p{font-size:1rem;color:var(--mid);text-align:center;font-weight:300}
-
-    /* PERFECT FOR */
-    .for-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;max-width:780px;margin:0 auto}
-    .for-item{background:var(--warm-white);border:1px solid var(--border);border-radius:4px;padding:16px 20px;font-size:.9rem;color:var(--dark);font-weight:500}
-
-    /* WHY DIFFERENT */
-    .why-block{max-width:640px;margin:28px auto 0;display:flex;flex-direction:column;gap:16px}
-    .why-block p{font-size:1rem;color:var(--mid);font-weight:300;line-height:1.8}
-
-    /* INSTANT DOWNLOAD */
-    .download-block{max-width:540px;margin:24px auto 0}
-    .download-block p{font-size:1rem;color:var(--mid);font-weight:300;margin-bottom:28px;line-height:1.8}
-    .download-pills{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
-    .download-pill{background:var(--dark);color:#fff;padding:8px 20px;border-radius:100px;font-size:.78rem;font-weight:600;letter-spacing:.06em}
-
-    /* HERO MOCKUP */
-    .hero__mockup{margin-top:48px;max-width:320px;margin-left:auto;margin-right:auto;filter:drop-shadow(0 20px 40px rgba(30,21,18,.15))}
-    .hero__mockup img{width:100%;border-radius:4px}
-
-    /* SALON BANNER */
-    .salon-banner{position:relative;max-height:420px;overflow:hidden}
-    .salon-banner img{width:100%;height:420px;object-fit:cover;object-position:center top;display:block}
-    .salon-banner__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,21,18,.65) 0%,transparent 60%);display:flex;align-items:flex-end;justify-content:center;padding:40px 24px}
-    .salon-banner__text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,3vw,1.8rem);font-style:italic;color:#fff;text-align:center;max-width:600px}
-
-    /* BONUS IMAGE */
-    .bonus-img{margin-bottom:40px;border-radius:8px;overflow:hidden;max-height:340px}
-    .bonus-img img{width:100%;height:340px;object-fit:cover;object-position:center;display:block}
-
-    /* TESTI AVATAR WITH PHOTO */
-    .testi-card__avatar{width:42px;height:42px;border-radius:50%;overflow:hidden;flex-shrink:0}
-    .testi-card__avatar img{width:100%;height:100%;object-fit:cover}
+    /* ── MOBILE BREAKPOINTS ── */
+    @media(max-width:768px){
+      .included-grid{grid-template-columns:1fr;gap:28px}
+      .bonus-grid{grid-template-columns:1fr;gap:12px}
+      .learn-grid{grid-template-columns:1fr}
+    }
 
     @media(max-width:600px){
-      .hero{padding:56px 18px 52px}
-      .section{padding:60px 18px}
-      .hero__badges{gap:18px}
+      .hero{padding:44px 16px 56px}
+      .hero::before{width:200px;height:200px;top:-60px;right:-60px}
+      .hero::after{display:none}
+      .hero__badges{grid-template-columns:repeat(2,1fr);max-width:260px;gap:8px}
+      .hero__price-card{padding:20px 22px;border-radius:14px}
+      .hero__price-now{font-size:3.2rem}
+      .section{padding:56px 16px}
+      .salon-banner{height:280px}
+      .bonus-img{height:220px}
+      .cta{padding:60px 16px 80px}
+      .cta__now{font-size:3rem}
       .nav__cta{display:none}
+      .sticky-bar{display:block}
+      body{padding-bottom:68px}
+      .testi-grid{grid-template-columns:1fr}
+      .for-grid{grid-template-columns:1fr}
+    }
+
+    @media(max-width:380px){
+      .hero__title{font-size:1.85rem}
+      .hero__price-now{font-size:2.8rem}
+      .hero__badges{max-width:220px}
     }
   </style>
 </head>
@@ -227,7 +268,7 @@
       <div class="hero__badges">
         <div class="badge"><div class="badge__icon">📄</div><span class="badge__label">47 Pages</span></div>
         <div class="badge"><div class="badge__icon">⚡</div><span class="badge__label">Instant Download</span></div>
-        <div class="badge"><div class="badge__icon">🎁</div><span class="badge__label">3 Free Bonuses</span></div>
+        <div class="badge"><div class="badge__icon">🎁</div><span class="badge__label">3 Bonuses</span></div>
         <div class="badge"><div class="badge__icon">📱</div><span class="badge__label">Any Device</span></div>
       </div>
     </div>
@@ -244,7 +285,7 @@
   <!-- PRODUCT INTRO -->
   <section class="section section--alt">
     <div class="container">
-      <p class="section__tag">Introducing</p>
+      <span class="section__tag">Introducing</span>
       <h2 class="section__title">The Hair Braiding Training Manual</h2>
       <p class="section__sub" style="margin-bottom:0">A complete 47-page digital manual designed to teach you the fundamentals of hair braiding in a simple, practical, and easy-to-follow way.</p>
       <div class="intro-block">
@@ -257,7 +298,7 @@
   <!-- WHAT YOU'LL LEARN -->
   <section class="section">
     <div class="container--wide">
-      <p class="section__tag">What You Will Learn</p>
+      <span class="section__tag">What You Will Learn</span>
       <h2 class="section__title">Six Modules. One Solid Foundation.</h2>
       <p class="section__sub">Clear, practical, immediately applicable — no fluff, no filler.</p>
       <div class="learn-grid">
@@ -276,7 +317,7 @@
   <!-- INCLUDED -->
   <section class="section section--alt">
     <div class="container">
-      <p class="section__tag">What You Receive</p>
+      <span class="section__tag">What You Receive</span>
       <h2 class="section__title">Everything Included</h2>
       <p class="section__sub">Everything you need to start, practice, and grow — delivered instantly.</p>
       <div class="included-grid">
@@ -288,14 +329,14 @@
           <li><div><strong>PDF Digital Download</strong> — Works on any device, phone, tablet, or computer.</div></li>
         </ul>
         <div class="details-box">
-          <p class="details-box__tag">Product Details</p>
+          <span class="details-box__tag">Product Details</span>
           <h3 class="details-box__title">Hair Braiding Training Manual</h3>
           <p class="details-box__list">
-            <span>Format — PDF</span>
-            <span>Pages — 47</span>
-            <span>Type — Digital Download</span>
-            <span>Level — Beginner</span>
-            <span>Access — Instant</span>
+            <span><span>Format</span><span>PDF</span></span>
+            <span><span>Pages</span><span>47</span></span>
+            <span><span>Type</span><span>Digital Download</span></span>
+            <span><span>Level</span><span>Beginner</span></span>
+            <span><span>Access</span><span>Instant</span></span>
           </p>
         </div>
       </div>
@@ -305,15 +346,15 @@
   <!-- PERFECT FOR -->
   <section class="section">
     <div class="container">
-      <p class="section__tag">Perfect For</p>
+      <span class="section__tag">Perfect For</span>
       <h2 class="section__title">Is This Guide For You?</h2>
       <p class="section__sub">This manual was built for anyone who wants to turn braiding into a real skill.</p>
       <div class="for-grid">
-        <div class="for-item">✓ Beginners who want to learn how to braid</div>
-        <div class="for-item">✓ Beauty and hairstyling students</div>
-        <div class="for-item">✓ Aspiring hairstylists developing new skills</div>
-        <div class="for-item">✓ Anyone who wants to turn a passion into a concrete skill</div>
-        <div class="for-item">✓ People interested in the beauty and haircare industry</div>
+        <div class="for-item">Beginners who want to learn how to braid</div>
+        <div class="for-item">Beauty and hairstyling students</div>
+        <div class="for-item">Aspiring hairstylists developing new skills</div>
+        <div class="for-item">Anyone who wants to turn a passion into a concrete skill</div>
+        <div class="for-item">People interested in the beauty and haircare industry</div>
       </div>
     </div>
   </section>
@@ -323,7 +364,7 @@
   <!-- WHY DIFFERENT -->
   <section class="section section--alt">
     <div class="container">
-      <p class="section__tag">Why This Guide Is Different</p>
+      <span class="section__tag">Why This Guide Is Different</span>
       <h2 class="section__title">Most tutorials show you the result. This guide teaches you the process.</h2>
       <div class="why-block">
         <p>Instead of searching through dozens of videos that skip the important steps, you get a structured path that helps you build a solid foundation — and develop your skills with greater confidence.</p>
@@ -335,8 +376,8 @@
   <!-- BONUSES -->
   <section class="section">
     <div class="container">
-      <div style="text-align:center;margin-bottom:32px"><span class="bonus-label">🎁 FREE Bonuses — Included With Every Purchase</span></div>
-      <p class="section__tag">Exclusive Bonuses</p>
+      <div style="text-align:center;margin-bottom:28px"><span class="bonus-label">🎁 FREE Bonuses — Included With Every Purchase</span></div>
+      <span class="section__tag">Exclusive Bonuses</span>
       <h2 class="section__title">Three Professional Templates — Included Free</h2>
       <p class="section__sub">Go from student to professional from day one.</p>
       <div class="bonus-img">
@@ -350,11 +391,10 @@
     </div>
   </section>
 
-
   <!-- TESTIMONIALS -->
   <section class="section section--alt">
     <div class="container--wide">
-      <p class="section__tag">What They're Saying</p>
+      <span class="section__tag">What They're Saying</span>
       <h2 class="section__title">Real Results from Real Women</h2>
       <p class="section__sub">Hundreds of beginners have used this guide to launch their braiding journey.</p>
       <div class="testi-grid">
@@ -379,7 +419,7 @@
           <p class="testi-card__text">"I bought this on a whim and ended up reading the whole thing in one sitting. The quality is impressive and the step-by-step photos make everything so clear."</p>
           <div class="testi-card__author">
             <div class="testi-card__avatar"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194125_53358569-ddb9-4a2b-842e-25ac37fc2b64.png" alt="Aaliyah K." /></div>
-            <div><div class="testi-card__name">Aaliyah K.</div><div class="testi-card__role">Digital Entrepreneur, Chicago</div></div>
+            <div><div class="testi-card__name">Aaliyah K.</div><div class="testi-card__role">Aspiring Hairstylist, Chicago</div></div>
           </div>
         </div>
       </div>
@@ -389,13 +429,12 @@
   <!-- FAQ -->
   <section class="section">
     <div class="container">
-      <p class="section__tag">Got Questions?</p>
+      <span class="section__tag">Got Questions?</span>
       <h2 class="section__title">Frequently Asked Questions</h2>
-      <p class="section__sub" style="margin-bottom:44px">Everything you need to know before you buy.</p>
+      <p class="section__sub" style="margin-bottom:40px">Everything you need to know before you buy.</p>
       <div class="faq-list">
         <div class="faq-item"><button class="faq-q">Do I need any experience to use this guide?<span class="faq-icon">+</span></button><div class="faq-a">Not at all. This manual was built specifically for complete beginners — simple, jargon-free language from start to finish.</div></div>
         <div class="faq-item"><button class="faq-q">How do I receive my download after purchase?<span class="faq-icon">+</span></button><div class="faq-a">Instantly. As soon as your payment is confirmed, you'll receive an email with a direct download link. No waiting, no shipping.</div></div>
-        <div class="faq-item"><button class="faq-q">What does PLR / MRR mean exactly?<span class="faq-icon">+</span></button><div class="faq-a">PLR = Private Label Rights (rebrand as your own). MRR = Master Resell Rights (sell to others and keep 100% of revenue). Buy once, income stream forever.</div></div>
         <div class="faq-item"><button class="faq-q">Can I use this guide even if I have zero experience?<span class="faq-icon">+</span></button><div class="faq-a">Absolutely. The guide starts from the very basics — anatomy of the braid, tool selection, tension control — and builds up progressively. No prior experience needed.</div></div>
         <div class="faq-item"><button class="faq-q">What format is the guide in?<span class="faq-icon">+</span></button><div class="faq-a">47-page PDF — works on any device. Read on screen or print it out.</div></div>
         <div class="faq-item"><button class="faq-q">Is there a refund policy?<span class="faq-icon">+</span></button><div class="faq-a">Because this is a digital product with instant access, all sales are final. Issues accessing your files? Contact our support and we'll make it right.</div></div>
@@ -403,10 +442,10 @@
     </div>
   </section>
 
-  <!-- INSTANT DOWNLOAD SECTION -->
+  <!-- INSTANT DOWNLOAD -->
   <section class="section section--alt">
     <div class="container" style="text-align:center">
-      <p class="section__tag">Instant Download</p>
+      <span class="section__tag">Instant Download</span>
       <h2 class="section__title">Start Learning In the Next 60 Seconds</h2>
       <div class="download-block">
         <p>After your purchase you will immediately receive the PDF file and can start studying whenever you want — directly from your phone, tablet, or computer.</p>
@@ -422,14 +461,14 @@
   <!-- FINAL CTA -->
   <section class="cta" id="buy">
     <div class="container">
-      <p class="cta__tag">✦ Start Your Hair Braiding Journey ✦</p>
+      <span class="cta__tag">✦ Start Your Hair Braiding Journey ✦</span>
       <h2 class="cta__title">Build a Real Skill. Starting Today.</h2>
       <p class="cta__sub">Acquire a practical skill, improve your techniques, and build the foundation to create increasingly professional braids.</p>
       <div class="cta__price">
         <span class="cta__was">{{ current_variant.compare_at_price | money }}</span>
         <span class="cta__now">{{ current_variant.price | money }}</span>
       </div>
-      <a href="{{ buy_url }}" class="btn-primary">Download Your Hair Braiding Manual Now →</a>
+      <a href="{{ buy_url }}" class="cta__btn">Download Your Hair Braiding Manual Now →</a>
       <div class="cta__perks">
         <span class="cta__perk">Instant PDF Download</span>
         <span class="cta__perk">Beginner Friendly</span>
@@ -443,7 +482,19 @@
     <p>© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved. &nbsp;·&nbsp; <a href="{{ shop.url }}/policies/privacy-policy">Privacy</a> &nbsp;·&nbsp; <a href="{{ shop.url }}/policies/terms-of-service">Terms</a></p>
   </footer>
 
+  <!-- FLOATING MOBILE BAR -->
+  <div class="sticky-bar" id="stickyBar">
+    <div class="sticky-bar__inner">
+      <div class="sticky-bar__price">
+        <span class="sticky-bar__was">{{ current_variant.compare_at_price | money }}</span>
+        <span class="sticky-bar__now">{{ current_variant.price | money }}</span>
+      </div>
+      <a href="{{ buy_url }}" class="sticky-bar__btn">Get Instant Access →</a>
+    </div>
+  </div>
+
   <script>
+    // FAQ accordion
     document.querySelectorAll('.faq-q').forEach(btn=>{
       btn.addEventListener('click',()=>{
         const item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');
@@ -451,6 +502,17 @@
         if(!isOpen)item.classList.add('open');
       });
     });
+
+    // Hide sticky bar when final CTA is visible
+    const buySection=document.getElementById('buy');
+    const stickyBar=document.getElementById('stickyBar');
+    if(buySection&&stickyBar){
+      const obs=new IntersectionObserver(entries=>{
+        stickyBar.style.opacity=entries[0].isIntersecting?'0':'1';
+        stickyBar.style.pointerEvents=entries[0].isIntersecting?'none':'auto';
+      },{threshold:0.1});
+      obs.observe(buySection);
+    }
   </script>
 
 </body>
