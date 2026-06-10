@@ -652,6 +652,79 @@
         if (!isOpen) item.classList.add('open');
       });
     });
+
+    /* ── MOBILE A: SCROLL PROGRESS BAR ── */
+    (function() {
+      const bar = document.createElement('div');
+      bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#C9A96E,#C4714A);width:0%;z-index:9999;transition:width .1s linear;pointer-events:none';
+      document.body.appendChild(bar);
+      window.addEventListener('scroll', () => {
+        const doc = document.documentElement;
+        const pct = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+        bar.style.width = pct + '%';
+      }, { passive: true });
+    })();
+
+    /* ── MOBILE B: HAPTIC + CONFETTI DORATO sul CTA ── */
+    (function() {
+      const COLORS = ['#C9A96E','#E8D5B0','#C4714A','#fff','#F5ECD9','#A85B38'];
+      function confetti(originX, originY) {
+        const count = 38;
+        for (let i = 0; i < count; i++) {
+          const el = document.createElement('div');
+          const size = 5 + Math.random() * 6;
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 60 + Math.random() * 120;
+          const tx = Math.cos(angle) * dist;
+          const ty = Math.sin(angle) * dist - 60;
+          const rot = Math.random() * 720 - 360;
+          const shape = Math.random() > 0.5 ? '50%' : '2px';
+          el.style.cssText = `
+            position:fixed;
+            left:${originX}px;top:${originY}px;
+            width:${size}px;height:${size * (Math.random() > 0.5 ? 1 : 2.5)}px;
+            background:${COLORS[Math.floor(Math.random() * COLORS.length)]};
+            border-radius:${shape};
+            pointer-events:none;z-index:9998;
+            transform:translate(-50%,-50%);
+            animation:cfetti .8s cubic-bezier(.22,1,.36,1) forwards;
+            --tx:${tx}px;--ty:${ty}px;--rot:${rot}deg;
+          `;
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 900);
+        }
+      }
+
+      if (!document.getElementById('cfettiStyle')) {
+        const s = document.createElement('style');
+        s.id = 'cfettiStyle';
+        s.textContent = `
+          @keyframes cfetti {
+            0%   { opacity:1; transform:translate(-50%,-50%) scale(1) rotate(0deg) }
+            100% { opacity:0; transform:translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(.4) rotate(var(--rot)) }
+          }
+        `;
+        document.head.appendChild(s);
+      }
+
+      document.querySelectorAll('.btn-primary, .cta__btn, .sticky-bar__btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          /* haptic */
+          if (navigator.vibrate) navigator.vibrate([12, 40, 8]);
+          /* confetti from tap/click point */
+          const r = btn.getBoundingClientRect();
+          const x = (e.clientX || r.left + r.width / 2);
+          const y = (e.clientY || r.top + r.height / 2);
+          confetti(x, y);
+        });
+        /* touch support */
+        btn.addEventListener('touchstart', e => {
+          if (navigator.vibrate) navigator.vibrate([12, 40, 8]);
+          const t = e.touches[0];
+          confetti(t.clientX, t.clientY);
+        }, { passive: true });
+      });
+    })();
   </script>
 
 </body>
