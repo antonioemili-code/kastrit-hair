@@ -77,7 +77,9 @@
       animation:fadein .8s cubic-bezier(.22,1,.36,1) .5s forwards;
     }
 
-    /* CTA */
+    /* CTA wrapper handles the fade-in */
+    .cta-wrap{opacity:0;animation:fadein .8s cubic-bezier(.22,1,.36,1) .7s forwards}
+    /* CTA handles pulse separately, after fade completes */
     .cta{
       display:inline-block;
       background:var(--dark);
@@ -90,8 +92,7 @@
       border-radius:2px;
       text-decoration:none;
       transition:background .25s,transform .2s,box-shadow .2s;
-      opacity:0;
-      animation:fadein .8s cubic-bezier(.22,1,.36,1) .7s forwards,pulse-cta 3s ease-in-out 2.5s infinite;
+      animation:pulse-cta 3s ease-in-out 2.5s infinite;
     }
     .cta:hover{background:var(--terracotta);transform:translateY(-2px);box-shadow:0 8px 24px rgba(196,113,74,.4);animation:none}
     @keyframes pulse-cta{
@@ -153,7 +154,9 @@
     <p class="tagline">Professional techniques, beginner-friendly guide.<br>Start learning today — instantly.</p>
 
     {% if first_product %}
-      <a href="{{ first_product.url }}" class="cta" id="mainCta">Shop the Guide →</a>
+      <div class="cta-wrap">
+        <a href="{{ first_product.url }}" class="cta" id="mainCta">Shop the Guide →</a>
+      </div>
     {% endif %}
 
     <div class="line"></div>
