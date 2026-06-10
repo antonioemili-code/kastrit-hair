@@ -4,22 +4,366 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{ shop.name }}</title>
-  {% assign first_product = collections.all.products.first %}
-  {% if first_product %}
-    <meta http-equiv="refresh" content="0; url={{ first_product.url }}">
-  {% endif %}
+  <title>Kastrit — The Art of Braiding, Made Accessible</title>
+  <meta name="description" content="Kastrit teaches women how to braid with confidence. Professional techniques, beginner-friendly guides, instant digital access.">
   {{ content_for_header }}
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;background:#FAF6F1;display:flex;align-items:center;justify-content:center;height:100vh;font-family:Georgia,serif}
-    a{color:#C4714A;font-size:1rem;text-decoration:none;border-bottom:1px solid #C4714A}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --cream:#FAF6F1;--warm-white:#FFFDF9;--gold:#C9A96E;--gold-light:#E8D5B0;
+      --gold-pale:#F5ECD9;--terracotta:#C4714A;--terra-dark:#A85B38;
+      --dark:#1A100D;--mid:#6B5B52;--soft:#A89080;--border:#EAE0D4;
+    }
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{font-family:'Inter',sans-serif;background:var(--warm-white);color:var(--dark);line-height:1.6;overflow-x:hidden;transition:background-color 1s cubic-bezier(.22,1,.36,1)}
+    h1,h2,h3{font-family:'Cormorant Garamond',serif;line-height:1.12}
+    img{max-width:100%;display:block}
+    a{text-decoration:none}
+    .container{max-width:860px;margin:0 auto;padding:0 20px}
+    .container--wide{max-width:1080px;margin:0 auto;padding:0 20px}
+    .section__tag{font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:block}
+    .section__title{font-size:clamp(1.75rem,4.5vw,2.6rem);font-weight:700;color:var(--dark);max-width:580px;margin:0 auto 10px}
+
+    /* NAV */
+    .nav{background:rgba(255,253,249,.96);border-bottom:1px solid var(--border);padding:14px 20px;position:sticky;top:0;z-index:200;backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(26,16,13,.05)}
+    .nav__inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .nav__logo{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;letter-spacing:.12em;color:var(--dark);text-transform:uppercase}
+    .nav__links{display:flex;align-items:center;gap:28px}
+    .nav__link{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);transition:color .2s}
+    .nav__link:hover{color:var(--terracotta)}
+    .nav__cta{background:var(--dark);color:#fff;padding:9px 22px;border-radius:3px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background .2s}
+    .nav__cta:hover{background:var(--terracotta)}
+
+    /* SCROLL REVEAL */
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+    .reveal.reveal--left{transform:translateX(-32px)}
+    .reveal.reveal--right{transform:translateX(32px)}
+    .reveal.visible{opacity:1;transform:translate(0,0)}
+
+    /* HERO */
+    .hero{min-height:92vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 20px;background:var(--cream);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-120px;right:-120px;width:500px;height:500px;border-radius:50%;background:var(--gold-pale);opacity:.45;pointer-events:none}
+    .hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:340px;height:340px;border-radius:50%;background:var(--gold-pale);opacity:.3;pointer-events:none}
+    .hero__inner{position:relative;z-index:1}
+    .hero__eyebrow{display:inline-block;font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;border:1px solid var(--gold-light);padding:6px 18px;border-radius:100px}
+    .hero__title{font-size:clamp(2.6rem,9vw,5.8rem);font-weight:700;color:var(--dark);max-width:800px;margin:0 auto 24px;letter-spacing:-.01em}
+    .hero__title em{color:var(--terracotta);font-style:italic}
+    .hero__sub{font-size:1.05rem;color:var(--mid);max-width:480px;margin:0 auto 48px;font-weight:300;line-height:1.75}
+    .hero__actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+    .btn-primary{display:inline-block;background:var(--terracotta);color:#fff;padding:16px 40px;font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;box-shadow:0 4px 18px rgba(196,113,74,.35);animation:pulse-btn 3s ease-in-out 2s infinite}
+    .btn-primary:hover{background:var(--terra-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,113,74,.5);animation:none}
+    @keyframes pulse-btn{0%,100%{box-shadow:0 4px 18px rgba(196,113,74,.35)}50%{box-shadow:0 4px 28px rgba(196,113,74,.6),0 0 0 6px rgba(196,113,74,.1)}}
+    .btn-ghost{display:inline-block;color:var(--dark);padding:16px 32px;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--border);border-radius:4px;transition:border-color .2s,color .2s}
+    .btn-ghost:hover{border-color:var(--dark)}
+    .hero__scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+    .hero__scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scroll-line 1.8s ease-in-out infinite}
+    @keyframes scroll-line{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+    /* MARQUEE */
+    .marquee{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;background:var(--warm-white)}
+    .marquee__track{display:flex;gap:48px;width:max-content;animation:marquee 22s linear infinite}
+    .marquee__track:hover{animation-play-state:paused}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .marquee__item{font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--soft);white-space:nowrap;display:flex;align-items:center;gap:14px}
+    .marquee__item::after{content:'✦';color:var(--gold-light);font-size:.5rem}
+
+    /* MISSION */
+    .mission{padding:100px 20px;text-align:center}
+    .mission__title{font-size:clamp(1.9rem,5vw,3.2rem);font-weight:700;max-width:620px;margin:0 auto 28px}
+    .mission__body{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+    .mission__body p{font-size:1rem;color:var(--mid);font-weight:300;line-height:1.85}
+    .mission__sig{margin-top:32px;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--dark)}
+
+    /* PILLARS */
+    .pillars{padding:80px 20px;background:var(--cream)}
+    .pillars__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .pillar{padding:40px 32px;background:var(--warm-white);transition:background .3s}
+    .pillar:hover{background:var(--gold-pale)}
+    .pillar__num{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--gold-light);margin-bottom:14px;line-height:1}
+    .pillar__title{font-size:1.05rem;font-weight:600;color:var(--dark);margin-bottom:10px}
+    .pillar__desc{font-size:.85rem;color:var(--mid);line-height:1.7;font-weight:300}
+
+    /* PRODUCT FEATURE */
+    .feature{padding:100px 20px}
+    .feature__inner{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;max-width:900px;margin:0 auto}
+    .feature__img{border-radius:12px;overflow:hidden;box-shadow:0 24px 60px rgba(26,16,13,.15),0 8px 20px rgba(26,16,13,.08)}
+    .feature__img img{width:100%;height:100%;object-fit:cover}
+    .feature__tag{font-size:.64rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+    .feature__title{font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;margin-bottom:16px;line-height:1.15}
+    .feature__desc{font-size:.93rem;color:var(--mid);font-weight:300;line-height:1.8;margin-bottom:28px}
+    .feature__price{display:flex;align-items:baseline;gap:10px;margin-bottom:28px}
+    .feature__was{font-size:.9rem;color:var(--soft);text-decoration:line-through}
+    .feature__now{font-family:'Inter',sans-serif;font-size:2rem;font-weight:600;color:var(--dark);letter-spacing:-.02em}
+    .feature__save{background:var(--terracotta);color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;align-self:center}
+    .feature__list{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+    .feature__list li{font-size:.88rem;color:var(--mid);display:flex;gap:10px;align-items:flex-start}
+    .feature__list li::before{content:'✦';color:var(--gold);font-size:.55rem;margin-top:5px;flex-shrink:0}
+
+    /* QUOTE BANNER */
+    .quote-banner{background:var(--dark);padding:80px 20px;text-align:center;position:relative;overflow:hidden}
+    .quote-banner::before{content:'';position:absolute;top:-60px;left:50%;transform:translateX(-50%);width:400px;height:400px;border-radius:50%;background:rgba(201,169,110,.06);pointer-events:none}
+    .quote-banner__mark{font-family:'Cormorant Garamond',serif;font-size:8rem;line-height:.6;color:rgba(201,169,110,.15);margin-bottom:8px}
+    .quote-banner__text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.4rem,4vw,2.4rem);font-style:italic;color:#fff;max-width:640px;margin:0 auto 24px;line-height:1.4}
+    .quote-banner__sub{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:500}
+
+    /* FOOTER */
+    .footer{background:var(--dark);color:rgba(255,255,255,.35);text-align:center;padding:32px 20px;font-size:.73rem;border-top:1px solid rgba(255,255,255,.06)}
+    .footer a{color:rgba(255,255,255,.35);text-decoration:underline}
+    .footer__logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.7);text-transform:uppercase;margin-bottom:12px;display:block}
+
+    /* MOBILE */
+    @media(max-width:768px){
+      .pillars__grid{grid-template-columns:1fr;gap:0}
+      .feature__inner{grid-template-columns:1fr;gap:36px}
+      .hero__actions{flex-direction:column;align-items:stretch;max-width:280px;margin:0 auto}
+      .btn-primary,.btn-ghost{text-align:center}
+    }
+    @media(max-width:600px){
+      .hero{min-height:88vh;padding:60px 16px}
+      .mission{padding:64px 16px}
+      .pillars{padding:56px 16px}
+      .feature{padding:64px 16px}
+      .pillar{padding:28px 22px}
+      .hero__scroll{display:none}
+      .nav__link{display:none}
+      .quote-banner{padding:56px 16px}
+    }
   </style>
 </head>
 <body>
-  {% if first_product %}
-    <a href="{{ first_product.url }}">Enter {{ shop.name }} →</a>
-  {% else %}
-    <p style="color:#6B5B52">Coming soon.</p>
-  {% endif %}
+
+  {% assign first_product = collections.all.products.first %}
+
+  <nav class="nav">
+    <div class="nav__inner">
+      <span class="nav__logo">Kastrit</span>
+      <div class="nav__links">
+        <a href="#about" class="nav__link">About</a>
+        <a href="#guide" class="nav__link">The Guide</a>
+        {% if first_product %}<a href="{{ first_product.url }}" class="nav__cta">Get the Guide</a>{% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__inner">
+      <span class="hero__eyebrow reveal">✦ Professional Hair Braiding</span>
+      <h1 class="hero__title reveal" data-delay="100" id="heroTitle">
+        The Art of Braiding,<br><em>Made Accessible.</em>
+      </h1>
+      <p class="hero__sub reveal" data-delay="220">We believe every woman deserves to learn the art of braiding — at her own pace, on her own terms, without paying for expensive courses.</p>
+      <div class="hero__actions reveal" data-delay="340">
+        {% if first_product %}
+          <a href="{{ first_product.url }}" class="btn-primary">Get the Guide — $9.99 →</a>
+          <a href="#about" class="btn-ghost">Our Story</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <div class="hero__scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee">
+    <div class="marquee__track">
+      {% for i in (1..2) %}
+        <span class="marquee__item">Hair Braiding</span>
+        <span class="marquee__item">Instant Download</span>
+        <span class="marquee__item">Professional Techniques</span>
+        <span class="marquee__item">Beginner Friendly</span>
+        <span class="marquee__item">47 Pages</span>
+        <span class="marquee__item">3 Free Bonuses</span>
+        <span class="marquee__item">Any Device</span>
+        <span class="marquee__item">$9.99</span>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <section class="mission" id="about">
+    <div class="container">
+      <span class="section__tag reveal">Our Mission</span>
+      <h2 class="mission__title reveal" data-delay="80">Braiding is a craft. We make it learnable.</h2>
+      <div class="mission__body reveal" data-delay="160">
+        <p>Kastrit was born from a simple observation: most women who want to learn how to braid struggle not because they lack talent — but because good information is scattered, incomplete, or locked behind expensive courses.</p>
+        <p>We built a different kind of resource. Structured, clear, beautifully designed — and priced so that anyone can access it.</p>
+        <p>Our goal is simple: help you build a skill you're proud of, at a price that doesn't make you think twice.</p>
+      </div>
+      <p class="mission__sig reveal" data-delay="260">— The Kastrit Team</p>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars">
+    <div class="container--wide">
+      <span class="section__tag reveal" style="text-align:center">What We Stand For</span>
+      <h2 class="section__title reveal" data-delay="80" style="text-align:center;margin:0 auto">Three principles. One guide.</h2>
+      <div class="pillars__grid">
+        <div class="pillar reveal" data-delay="0">
+          <div class="pillar__num">01</div>
+          <div class="pillar__title">Clarity over complexity</div>
+          <p class="pillar__desc">Every technique is explained step by step — no assumptions, no skipped steps, no jargon.</p>
+        </div>
+        <div class="pillar reveal" data-delay="100">
+          <div class="pillar__num">02</div>
+          <div class="pillar__title">Craft over shortcuts</div>
+          <p class="pillar__desc">We teach the fundamentals properly so your skills are solid, not patched together from random videos.</p>
+        </div>
+        <div class="pillar reveal" data-delay="200">
+          <div class="pillar__num">03</div>
+          <div class="pillar__title">Access for everyone</div>
+          <p class="pillar__desc">Professional knowledge shouldn't cost hundreds of dollars. We keep it affordable — always.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT FEATURE -->
+  <section class="feature" id="guide">
+    <div class="feature__inner">
+      <div class="feature__img reveal reveal--left">
+        {% if first_product and first_product.featured_image %}
+          <img src="{{ first_product.featured_image | img_url: '600x800', crop: 'center' }}" alt="{{ first_product.title }}" />
+        {% else %}
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194121_d3b873f5-5fc1-4020-abd2-5beeaf109a56.png" alt="Hair Braiding Training Manual" />
+        {% endif %}
+      </div>
+      <div class="reveal reveal--right" data-delay="100">
+        <span class="feature__tag">Our Product</span>
+        <h2 class="feature__title">Hair Braiding Training Manual</h2>
+        <p class="feature__desc">A complete 47-page digital guide that takes you from zero to confident braider — with professional techniques, practice pages, and three free business templates.</p>
+        <div class="feature__price">
+          <span class="feature__was">$97.00</span>
+          <span class="feature__now">$9.99</span>
+          <span class="feature__save">Save 90%</span>
+        </div>
+        <ul class="feature__list">
+          <li>47-page illustrated PDF guide</li>
+          <li>6 core modules from basics to advanced</li>
+          <li>Client consultation form + price list template</li>
+          <li>Instant access — any device</li>
+        </ul>
+        {% if first_product %}
+          <a href="{{ first_product.url }}" class="btn-primary" style="display:inline-block;width:auto">Get Instant Access →</a>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE BANNER -->
+  <div class="quote-banner">
+    <div class="quote-banner__mark reveal">"</div>
+    <p class="quote-banner__text reveal" data-delay="80">The skill that starts with a guide — the career that lasts a lifetime.</p>
+    <span class="quote-banner__sub reveal" data-delay="160">Kastrit — Hair Braiding Education</span>
+  </div>
+
+  <footer class="footer">
+    <span class="footer__logo">Kastrit</span>
+    <p>© {{ 'now' | date: '%Y' }} Kastrit. All rights reserved. &nbsp;·&nbsp;
+      <a href="/policies/privacy-policy">Privacy</a> &nbsp;·&nbsp;
+      <a href="/policies/terms-of-service">Terms</a>
+      {% if first_product %} &nbsp;·&nbsp; <a href="{{ first_product.url }}">The Guide</a>{% endif %}
+    </p>
+  </footer>
+
+  <script>
+    /* SCROLL REVEAL */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.transitionDelay = (e.target.dataset.delay || 0) + 'ms';
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* TEXT SPLIT — hero title */
+    (function() {
+      const title = document.getElementById('heroTitle');
+      if (!title) return;
+      title.innerHTML = title.innerHTML.replace(/(<br>|<em>.*?<\/em>|[^\s<]+)/g, m => {
+        if (m === '<br>') return '<br>';
+        return `<span style="display:inline-block;overflow:hidden;vertical-align:bottom;margin-right:.22em"><span style="display:inline-block;transform:translateY(110%);transition:transform .6s cubic-bezier(.22,1,.36,1)">${m}</span></span>`;
+      });
+      title.querySelectorAll('span > span').forEach((w, i) =>
+        setTimeout(() => w.style.transform = 'translateY(0)', 120 + i * 55)
+      );
+    })();
+
+    /* SECTION COLOR SHIFT */
+    (function() {
+      const sections = Array.from(document.querySelectorAll('.hero, .marquee, .mission, .pillars, .feature, .quote-banner'));
+      const palette = ['#FAF0E6','#FFFDF9','#F7EDE0','#F2EAD8','#FDF8F2','#1A100D'];
+      let activeIdx = -1, ticking = false;
+      function update() {
+        const mid = window.innerHeight / 2;
+        let closest = 0, minDist = Infinity;
+        sections.forEach((s, i) => {
+          const r = s.getBoundingClientRect();
+          const dist = Math.abs(r.top + r.height / 2 - mid);
+          if (dist < minDist) { minDist = dist; closest = i; }
+        });
+        if (closest !== activeIdx) {
+          activeIdx = closest;
+          document.body.style.backgroundColor = palette[closest] || palette[0];
+        }
+        ticking = false;
+      }
+      window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
+      update();
+    })();
+
+    /* SCROLL PROGRESS BAR */
+    (function() {
+      const bar = document.createElement('div');
+      bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#C9A96E,#C4714A);width:0%;z-index:9999;pointer-events:none;transition:width .1s linear';
+      document.body.appendChild(bar);
+      window.addEventListener('scroll', () => {
+        const d = document.documentElement;
+        bar.style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+      }, { passive: true });
+    })();
+
+    /* MAGNETIC BUTTON (desktop only) */
+    if (!window.matchMedia('(hover: none)').matches) {
+      document.querySelectorAll('.btn-primary, .btn-ghost, .nav__cta').forEach(btn => {
+        btn.addEventListener('mousemove', e => {
+          const r = btn.getBoundingClientRect();
+          btn.style.transform = `translate(${(e.clientX - r.left - r.width/2) * .18}px,${(e.clientY - r.top - r.height/2) * .18}px)`;
+        });
+        btn.addEventListener('mouseleave', () => btn.style.transform = '');
+      });
+    }
+
+    /* CONFETTI */
+    (function() {
+      const COLORS = ['#C9A96E','#E8D5B0','#C4714A','#fff','#F5ECD9','#A85B38'];
+      function confetti(ox, oy) {
+        for (let i = 0; i < 38; i++) {
+          const el = document.createElement('div');
+          const size = 5 + Math.random() * 6;
+          const angle = Math.random() * Math.PI * 2;
+          const dist = 60 + Math.random() * 120;
+          el.style.cssText = `position:fixed;left:${ox}px;top:${oy}px;width:${size}px;height:${size*(Math.random()>.5?1:2.5)}px;background:${COLORS[Math.floor(Math.random()*COLORS.length)]};border-radius:${Math.random()>.5?'50%':'2px'};pointer-events:none;z-index:9998;transform:translate(-50%,-50%);animation:cfetti .8s cubic-bezier(.22,1,.36,1) forwards;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist-60}px;--rot:${Math.random()*720-360}deg`;
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 900);
+        }
+      }
+      const s = document.createElement('style');
+      s.textContent = '@keyframes cfetti{0%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(0deg)}100%{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(.4) rotate(var(--rot))}}';
+      document.head.appendChild(s);
+      document.querySelectorAll('.btn-primary').forEach(btn => {
+        btn.addEventListener('click', e => confetti(e.clientX || btn.getBoundingClientRect().left + btn.offsetWidth/2, e.clientY || btn.getBoundingClientRect().top));
+        btn.addEventListener('touchstart', e => { const t = e.touches[0]; confetti(t.clientX, t.clientY); }, { passive: true });
+      });
+    })();
+  </script>
+
 </body>
 </html>
