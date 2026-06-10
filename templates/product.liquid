@@ -7,7 +7,7 @@
   <title>{{ product.title }} — {{ shop.name }}</title>
   <meta name="description" content="{{ product.description | strip_html | truncate: 150 }}">
   {{ content_for_header }}
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{
@@ -34,18 +34,40 @@
     .container--wide{max-width:1080px;margin:0 auto;padding:0 20px}
 
     /* ── NAV ── */
-    .nav{background:var(--warm-white);border-bottom:1px solid var(--border);padding:14px 20px;position:sticky;top:0;z-index:200;backdrop-filter:blur(10px)}
+    .nav{
+      background:transparent;
+      border-bottom:1px solid transparent;
+      padding:18px 20px;
+      position:sticky;top:0;z-index:200;
+      transition:background .4s,border-color .4s,padding .4s,box-shadow .4s;
+    }
+    .nav.scrolled{
+      background:rgba(255,253,249,.96);
+      border-bottom-color:var(--border);
+      padding:12px 20px;
+      box-shadow:0 2px 20px rgba(26,16,13,.06);
+      backdrop-filter:blur(12px);
+    }
     .nav__inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
     .nav__logo{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:700;letter-spacing:.12em;color:var(--dark);text-transform:uppercase;flex-shrink:0}
     .nav__cta{background:var(--dark);color:#fff;padding:9px 22px;border-radius:3px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background .2s;white-space:nowrap;flex-shrink:0}
     .nav__cta:hover{background:var(--terracotta)}
 
+    /* ── SCROLL REVEAL ── */
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* ── TEXT SPLIT (hero title words) ── */
+    .split-word{display:inline-block;overflow:hidden;vertical-align:bottom}
+    .split-word span{display:inline-block;transform:translateY(110%);transition:transform .6s cubic-bezier(.22,1,.36,1)}
+    .split-word.visible span{transform:translateY(0)}
+
     /* ── HERO ── */
-    .hero{background:var(--cream);padding:56px 20px 64px;text-align:center;position:relative;overflow:hidden}
+    .hero{background:var(--cream);padding:64px 20px 72px;text-align:center;position:relative;overflow:hidden}
     .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:var(--gold-pale);opacity:.5;pointer-events:none}
     .hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:240px;height:240px;border-radius:50%;background:var(--gold-pale);opacity:.35;pointer-events:none}
     .hero__tag{display:inline-block;font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta);margin-bottom:16px;position:relative}
-    .hero__title{font-size:clamp(2rem,7vw,3.8rem);font-weight:700;color:var(--dark);max-width:720px;margin:0 auto 18px;position:relative}
+    .hero__title{font-size:clamp(2rem,7vw,3.8rem);font-weight:700;color:var(--dark);max-width:720px;margin:0 auto 18px;position:relative;line-height:1.18}
     .hero__title em{color:var(--terracotta);font-style:italic}
     .hero__sub{font-size:1rem;color:var(--mid);max-width:500px;margin:0 auto 32px;font-weight:300;line-height:1.7;position:relative}
 
@@ -58,17 +80,47 @@
     .hero__mockup{margin:40px auto 0;max-width:280px;position:relative;z-index:1}
     .hero__mockup img{width:100%;border-radius:8px;box-shadow:0 24px 60px rgba(30,21,18,.18),0 8px 20px rgba(30,21,18,.1)}
 
-    /* Price card */
-    .hero__price-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 28px;margin:32px auto 0;display:block;width:100%;max-width:340px;box-shadow:var(--card-shadow);position:relative;z-index:1}
+    /* Price card + shimmer */
+    .hero__price-card{
+      background:#fff;border:1px solid var(--border);border-radius:16px;
+      padding:24px 28px;margin:32px auto 0;display:block;width:100%;max-width:340px;
+      box-shadow:var(--card-shadow);position:relative;z-index:1;overflow:hidden;
+    }
+    .hero__price-card::after{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);
+      transform:translateX(-100%);
+      animation:shimmer 3.5s ease-in-out 1.5s infinite;
+    }
+    @keyframes shimmer{
+      0%{transform:translateX(-100%)}
+      60%,100%{transform:translateX(150%)}
+    }
     .hero__price-was{display:block;font-size:.82rem;color:var(--soft);text-decoration:line-through;letter-spacing:.04em;margin-bottom:6px}
     .hero__price-row{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:10px}
     .hero__price-now{font-family:'Inter',sans-serif;font-size:2.6rem;font-weight:600;color:var(--dark);line-height:1;letter-spacing:-.02em}
     .hero__price-save{background:var(--terracotta);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:20px;align-self:center;flex-shrink:0}
     .hero__price-tag{display:block;font-size:.67rem;color:var(--terracotta);font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-top:1px solid var(--border);padding-top:12px;margin-top:2px}
 
-    /* CTA button */
-    .btn-primary{display:block;width:100%;max-width:340px;margin:16px auto 0;background:var(--terracotta);color:#fff;padding:17px 32px;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;border:none;cursor:pointer;text-align:center;box-shadow:0 4px 18px rgba(196,113,74,.38)}
-    .btn-primary:hover{background:var(--terra-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,113,74,.45)}
+    /* CTA button + pulse */
+    .btn-primary{
+      display:block;width:100%;max-width:340px;margin:16px auto 0;
+      background:var(--terracotta);color:#fff;padding:17px 32px;
+      font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+      border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;
+      border:none;cursor:pointer;text-align:center;
+      box-shadow:0 4px 18px rgba(196,113,74,.38);
+      animation:pulse-btn 3s ease-in-out 2s infinite;
+    }
+    .btn-primary:hover{
+      background:var(--terra-dark);transform:translateY(-2px);
+      box-shadow:0 8px 28px rgba(196,113,74,.5);
+      animation:none;
+    }
+    @keyframes pulse-btn{
+      0%,100%{box-shadow:0 4px 18px rgba(196,113,74,.38)}
+      50%{box-shadow:0 4px 28px rgba(196,113,74,.65),0 0 0 6px rgba(196,113,74,.1)}
+    }
     .hero__lock{font-size:.73rem;color:var(--soft);margin-top:12px;display:flex;align-items:center;justify-content:center;gap:5px}
 
     /* Badges */
@@ -84,9 +136,9 @@
     .section__title{font-size:clamp(1.75rem,4.5vw,2.6rem);font-weight:700;color:var(--dark);text-align:center;max-width:580px;margin:0 auto 10px}
     .section__sub{font-size:.92rem;color:var(--mid);text-align:center;max-width:480px;margin:0 auto 48px;font-weight:300;line-height:1.75}
 
-    /* SALON BANNER */
+    /* SALON BANNER + parallax */
     .salon-banner{position:relative;height:380px;overflow:hidden}
-    .salon-banner img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+    .salon-banner__img{width:100%;height:130%;object-fit:cover;object-position:center 30%;will-change:transform;display:block}
     .salon-banner__overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(26,16,13,.7) 0%,rgba(26,16,13,.1) 60%);display:flex;align-items:flex-end;justify-content:center;padding:36px 24px}
     .salon-banner__text{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.65rem);font-style:italic;color:#fff;text-align:center;max-width:580px;line-height:1.45}
 
@@ -94,10 +146,15 @@
     .intro-block{max-width:580px;margin:24px auto 0;display:flex;flex-direction:column;gap:12px}
     .intro-block p{font-size:.97rem;color:var(--mid);text-align:center;font-weight:300;line-height:1.75}
 
-    /* LEARN GRID */
+    /* LEARN GRID + tilt */
     .learn-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-    .learn-card{background:var(--warm-white);border:1px solid var(--border);border-radius:10px;padding:26px 22px;transition:border-color .2s,box-shadow .2s,transform .2s;box-shadow:var(--card-shadow)}
-    .learn-card:hover{border-color:var(--gold);box-shadow:var(--card-shadow-hover);transform:translateY(-3px)}
+    .learn-card{
+      background:var(--warm-white);border:1px solid var(--border);border-radius:10px;
+      padding:26px 22px;box-shadow:var(--card-shadow);
+      transform-style:preserve-3d;transition:border-color .2s,box-shadow .2s;
+      will-change:transform;
+    }
+    .learn-card:hover{border-color:var(--gold);box-shadow:var(--card-shadow-hover)}
     .learn-card__num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold-light);line-height:1;margin-bottom:10px}
     .learn-card__title{font-size:.97rem;font-weight:600;color:var(--dark);margin-bottom:6px}
     .learn-card__desc{font-size:.83rem;color:var(--mid);line-height:1.65}
@@ -129,14 +186,24 @@
     .bonus-img{margin-bottom:36px;border-radius:12px;overflow:hidden;height:300px;box-shadow:var(--card-shadow-hover)}
     .bonus-img img{width:100%;height:100%;object-fit:cover;object-position:center}
     .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .bonus-card{border:1px solid var(--border);border-radius:10px;padding:22px 18px;text-align:center;background:var(--warm-white);box-shadow:var(--card-shadow)}
+    .bonus-card{
+      border:1px solid var(--border);border-radius:10px;padding:22px 18px;
+      text-align:center;background:var(--warm-white);box-shadow:var(--card-shadow);
+      transform-style:preserve-3d;will-change:transform;transition:border-color .2s,box-shadow .2s;
+    }
+    .bonus-card:hover{border-color:var(--gold);box-shadow:var(--card-shadow-hover)}
     .bonus-card__icon{font-size:1.6rem;margin-bottom:10px}
     .bonus-card__title{font-size:.92rem;font-weight:600;color:var(--dark);margin-bottom:6px}
     .bonus-card__desc{font-size:.78rem;color:var(--mid);line-height:1.6}
 
     /* TESTIMONIALS */
     .testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
-    .testi-card{background:var(--warm-white);border:1px solid var(--border);border-radius:12px;padding:26px 22px;box-shadow:var(--card-shadow)}
+    .testi-card{
+      background:var(--warm-white);border:1px solid var(--border);border-radius:12px;
+      padding:26px 22px;box-shadow:var(--card-shadow);
+      transform-style:preserve-3d;will-change:transform;transition:border-color .2s,box-shadow .2s;
+    }
+    .testi-card:hover{border-color:var(--gold-light);box-shadow:var(--card-shadow-hover)}
     .testi-card__stars{color:var(--gold);font-size:.8rem;letter-spacing:2px;margin-bottom:14px}
     .testi-card__text{font-size:.88rem;color:var(--mid);line-height:1.75;margin-bottom:20px;font-style:italic}
     .testi-card__author{display:flex;align-items:center;gap:10px}
@@ -151,7 +218,7 @@
     .faq-q{width:100%;background:transparent;border:none;padding:18px 22px;text-align:left;font-family:'Inter',sans-serif;font-size:.88rem;font-weight:600;color:var(--dark);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:background .15s;line-height:1.4}
     .faq-q:hover{background:var(--cream)}
     .faq-icon{color:var(--gold);font-size:1.1rem;flex-shrink:0;transition:transform .25s;line-height:1}
-    .faq-a{background:var(--cream);padding:0 22px;font-size:.85rem;color:var(--mid);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+    .faq-a{background:var(--cream);padding:0 22px;font-size:.85rem;color:var(--mid);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.22,1,.36,1),padding .35s cubic-bezier(.22,1,.36,1)}
     .faq-item.open .faq-a{max-height:300px;padding:16px 22px 20px}
     .faq-item.open .faq-icon{transform:rotate(45deg)}
 
@@ -172,8 +239,15 @@
     .cta__price{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:28px}
     .cta__was{font-size:1.15rem;color:var(--soft);text-decoration:line-through}
     .cta__now{font-family:'Inter',sans-serif;font-size:2.4rem;font-weight:600;color:var(--dark);line-height:1;letter-spacing:-.02em}
-    .cta__btn{display:block;width:100%;max-width:380px;margin:0 auto;background:var(--terracotta);color:#fff;padding:18px 32px;font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;box-shadow:0 4px 18px rgba(196,113,74,.38);text-align:center}
-    .cta__btn:hover{background:var(--terra-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,113,74,.45)}
+    .cta__btn{
+      display:block;width:100%;max-width:380px;margin:0 auto;
+      background:var(--terracotta);color:#fff;padding:18px 32px;
+      font-size:.82rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+      border-radius:4px;transition:background .2s,transform .15s,box-shadow .15s;
+      box-shadow:0 4px 18px rgba(196,113,74,.38);text-align:center;
+      animation:pulse-btn 3s ease-in-out 1s infinite;
+    }
+    .cta__btn:hover{background:var(--terra-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(196,113,74,.5);animation:none}
     .cta__perks{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:16px}
     .cta__perk{font-size:.71rem;color:var(--soft);font-weight:500;display:flex;align-items:center;gap:5px}
     .cta__perk::before{content:'✓';color:var(--gold);font-weight:700}
@@ -183,49 +257,54 @@
     .footer a{color:rgba(255,255,255,.38);text-decoration:underline}
 
     /* FLOATING MOBILE CTA */
-    .sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--dark);padding:12px 16px;box-shadow:0 -4px 20px rgba(0,0,0,.2)}
+    .sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--dark);padding:12px 16px;box-shadow:0 -4px 20px rgba(0,0,0,.2);transition:opacity .3s}
     .sticky-bar__inner{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:480px;margin:0 auto}
     .sticky-bar__price{display:flex;flex-direction:column}
     .sticky-bar__was{font-size:.68rem;color:rgba(255,255,255,.4);text-decoration:line-through}
     .sticky-bar__now{font-family:'Inter',sans-serif;font-size:1.3rem;font-weight:600;color:#fff;line-height:1;letter-spacing:-.02em}
     .sticky-bar__btn{background:var(--terracotta);color:#fff;padding:11px 22px;border-radius:4px;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;flex-shrink:0;box-shadow:0 2px 10px rgba(196,113,74,.4)}
 
-    /* ── MOBILE BREAKPOINTS ── */
+    /* ── MOBILE ── */
     @media(max-width:768px){
       .included-grid{grid-template-columns:1fr;gap:28px}
       .bonus-grid{grid-template-columns:1fr;gap:12px}
       .learn-grid{grid-template-columns:1fr}
     }
-
     @media(max-width:600px){
       .hero{padding:44px 16px 56px}
       .hero::before{width:200px;height:200px;top:-60px;right:-60px}
       .hero::after{display:none}
       .hero__badges{grid-template-columns:repeat(2,1fr);max-width:260px;gap:8px}
       .hero__price-card{padding:20px 22px;border-radius:14px}
-      .hero__price-now{font-size:3.2rem}
+      .hero__price-now{font-size:2.2rem}
       .section{padding:56px 16px}
       .salon-banner{height:280px}
       .bonus-img{height:220px}
       .cta{padding:60px 16px 80px}
-      .cta__now{font-size:3rem}
+      .cta__now{font-size:2rem}
       .nav__cta{display:none}
       .sticky-bar{display:block}
       body{padding-bottom:68px}
       .testi-grid{grid-template-columns:1fr}
       .for-grid{grid-template-columns:1fr}
     }
-
     @media(max-width:380px){
       .hero__title{font-size:1.85rem}
-      .hero__price-now{font-size:2.8rem}
+      .hero__price-now{font-size:1.9rem}
       .hero__badges{max-width:220px}
+    }
+
+    /* Reduce motion */
+    @media(prefers-reduced-motion:reduce){
+      .reveal,.split-word span{transition:none}
+      .hero__price-card::after,.btn-primary,.cta__btn{animation:none}
+      .learn-card,.bonus-card,.testi-card{transition:none}
     }
   </style>
 </head>
 <body>
 
-  <nav class="nav">
+  <nav class="nav" id="mainNav">
     <div class="nav__inner">
       <span class="nav__logo">Kastrit</span>
       <a href="#buy" class="nav__cta">Get Instant Access</a>
@@ -238,12 +317,12 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <span class="hero__tag">✦ Hair Braiding Training Manual ✦</span>
-      <h1 class="hero__title">
+      <span class="hero__tag reveal" data-delay="0">✦ Hair Braiding Training Manual ✦</span>
+      <h1 class="hero__title" id="heroTitle">
         Learn the Art of Professional Braiding <em>Even If You're Starting From Zero</em>
       </h1>
-      <p class="hero__sub">The practical guide that teaches you step by step how to create neat, precise, professional braids — without expensive in-person courses.</p>
-      <div class="hero__pain">
+      <p class="hero__sub reveal" data-delay="600">The practical guide that teaches you step by step how to create neat, precise, professional braids — without expensive in-person courses.</p>
+      <div class="hero__pain reveal" data-delay="700">
         <p>Have you always wanted to learn how to braid perfectly but don't know where to start?</p>
         <p>Maybe you watch tutorials online that skip the most important steps.</p>
         <p>Maybe you've already tried a few styles but the result is never what you hoped for.</p>
@@ -251,21 +330,21 @@
         <p class="hero__pain-close"><strong>If any of this sounds like you — this guide was made for you.</strong></p>
       </div>
 
-      <div class="hero__mockup">
+      <div class="hero__mockup reveal" data-delay="800">
         <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194121_d3b873f5-5fc1-4020-abd2-5beeaf109a56.png" alt="Hair Braiding Training Manual" />
       </div>
 
-      <div class="hero__price-card">
+      <div class="hero__price-card reveal" data-delay="900">
         <span class="hero__price-was">Regular Price: {{ current_variant.compare_at_price | money }}</span>
         <div class="hero__price-row">
-          <span class="hero__price-now">{{ current_variant.price | money }}</span>
+          <span class="hero__price-now" id="priceDisplay">{{ current_variant.price | money }}</span>
           <span class="hero__price-save">Save 90%</span>
         </div>
         <span class="hero__price-tag">Limited Launch Price — Instant Download</span>
       </div>
-      <a href="{{ buy_url }}" class="btn-primary">Yes, I Want This Guide →</a>
-      <p class="hero__lock">🔒 &nbsp;Instant PDF Delivery · No experience required</p>
-      <div class="hero__badges">
+      <a href="{{ buy_url }}" class="btn-primary reveal" data-delay="980">Yes, I Want This Guide →</a>
+      <p class="hero__lock reveal" data-delay="1020">🔒 &nbsp;Instant PDF Delivery · No experience required</p>
+      <div class="hero__badges reveal" data-delay="1060">
         <div class="badge"><div class="badge__icon">📄</div><span class="badge__label">47 Pages</span></div>
         <div class="badge"><div class="badge__icon">⚡</div><span class="badge__label">Instant Download</span></div>
         <div class="badge"><div class="badge__icon">🎁</div><span class="badge__label">3 Bonuses</span></div>
@@ -274,21 +353,21 @@
     </div>
   </section>
 
-  <!-- SALON BANNER -->
+  <!-- SALON BANNER (parallax) -->
   <div class="salon-banner">
-    <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194122_34b5e22f-8d83-4752-a315-24d62b8e7611.png" alt="Hair braiding salon" />
+    <img class="salon-banner__img" id="parallaxImg" src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194122_34b5e22f-8d83-4752-a315-24d62b8e7611.png" alt="Hair braiding salon" />
     <div class="salon-banner__overlay">
-      <p class="salon-banner__text">"The skill that starts with a guide — the career that lasts a lifetime."</p>
+      <p class="salon-banner__text reveal">"The skill that starts with a guide — the career that lasts a lifetime."</p>
     </div>
   </div>
 
   <!-- PRODUCT INTRO -->
   <section class="section section--alt">
     <div class="container">
-      <span class="section__tag">Introducing</span>
-      <h2 class="section__title">The Hair Braiding Training Manual</h2>
-      <p class="section__sub" style="margin-bottom:0">A complete 47-page digital manual designed to teach you the fundamentals of hair braiding in a simple, practical, and easy-to-follow way.</p>
-      <div class="intro-block">
+      <span class="section__tag reveal">Introducing</span>
+      <h2 class="section__title reveal" data-delay="80">The Hair Braiding Training Manual</h2>
+      <p class="section__sub reveal" data-delay="150" style="margin-bottom:0">A complete 47-page digital manual designed to teach you the fundamentals of hair braiding in a simple, practical, and easy-to-follow way.</p>
+      <div class="intro-block reveal" data-delay="220">
         <p>Each section guides you step by step through the core techniques used by professional hairstylists.</p>
         <p>No experience required. Just clear instructions that help you improve your skills gradually and with confidence.</p>
       </div>
@@ -298,16 +377,16 @@
   <!-- WHAT YOU'LL LEARN -->
   <section class="section">
     <div class="container--wide">
-      <span class="section__tag">What You Will Learn</span>
-      <h2 class="section__title">Six Modules. One Solid Foundation.</h2>
-      <p class="section__sub">Clear, practical, immediately applicable — no fluff, no filler.</p>
+      <span class="section__tag reveal">What You Will Learn</span>
+      <h2 class="section__title reveal" data-delay="80">Six Modules. One Solid Foundation.</h2>
+      <p class="section__sub reveal" data-delay="150">Clear, practical, immediately applicable — no fluff, no filler.</p>
       <div class="learn-grid">
-        <div class="learn-card"><div class="learn-card__num">01</div><div class="learn-card__title">Understanding Hair Types</div><p class="learn-card__desc">Discover how to work correctly with different textures and characteristics to get better results from the very beginning.</p></div>
-        <div class="learn-card"><div class="learn-card__num">02</div><div class="learn-card__title">Essential Styling Tools</div><p class="learn-card__desc">Learn the tools professionals use every day — and exactly when and how to use them.</p></div>
-        <div class="learn-card"><div class="learn-card__num">03</div><div class="learn-card__title">Basic Braiding Techniques</div><p class="learn-card__desc">Master the fundamentals that will allow you to build solid, lasting skills from day one.</p></div>
-        <div class="learn-card"><div class="learn-card__num">04</div><div class="learn-card__title">Step-by-Step Process</div><p class="learn-card__desc">Follow a practical path that eliminates confusion and random trial and error.</p></div>
-        <div class="learn-card"><div class="learn-card__num">05</div><div class="learn-card__title">Hair Care Basics</div><p class="learn-card__desc">Learn the essentials of keeping hair healthy and ready for any style.</p></div>
-        <div class="learn-card"><div class="learn-card__num">06</div><div class="learn-card__title">Practice Pages</div><p class="learn-card__desc">Train with practical exercises designed to improve your speed, precision, and confidence.</p></div>
+        <div class="learn-card reveal" data-delay="0"><div class="learn-card__num">01</div><div class="learn-card__title">Understanding Hair Types</div><p class="learn-card__desc">Discover how to work correctly with different textures and characteristics to get better results from the very beginning.</p></div>
+        <div class="learn-card reveal" data-delay="80"><div class="learn-card__num">02</div><div class="learn-card__title">Essential Styling Tools</div><p class="learn-card__desc">Learn the tools professionals use every day — and exactly when and how to use them.</p></div>
+        <div class="learn-card reveal" data-delay="160"><div class="learn-card__num">03</div><div class="learn-card__title">Basic Braiding Techniques</div><p class="learn-card__desc">Master the fundamentals that will allow you to build solid, lasting skills from day one.</p></div>
+        <div class="learn-card reveal" data-delay="240"><div class="learn-card__num">04</div><div class="learn-card__title">Step-by-Step Process</div><p class="learn-card__desc">Follow a practical path that eliminates confusion and random trial and error.</p></div>
+        <div class="learn-card reveal" data-delay="320"><div class="learn-card__num">05</div><div class="learn-card__title">Hair Care Basics</div><p class="learn-card__desc">Learn the essentials of keeping hair healthy and ready for any style.</p></div>
+        <div class="learn-card reveal" data-delay="400"><div class="learn-card__num">06</div><div class="learn-card__title">Practice Pages</div><p class="learn-card__desc">Train with practical exercises designed to improve your speed, precision, and confidence.</p></div>
       </div>
     </div>
   </section>
@@ -317,18 +396,18 @@
   <!-- INCLUDED -->
   <section class="section section--alt">
     <div class="container">
-      <span class="section__tag">What You Receive</span>
-      <h2 class="section__title">Everything Included</h2>
-      <p class="section__sub">Everything you need to start, practice, and grow — delivered instantly.</p>
+      <span class="section__tag reveal">What You Receive</span>
+      <h2 class="section__title reveal" data-delay="80">Everything Included</h2>
+      <p class="section__sub reveal" data-delay="150">Everything you need to start, practice, and grow — delivered instantly.</p>
       <div class="included-grid">
-        <ul class="check-list">
+        <ul class="check-list reveal" data-delay="0">
           <li><div><strong>47-Page Hair Braiding Training Manual</strong> — The complete digital guide.</div></li>
           <li><div><strong>Beginner-Friendly Guide</strong> — Written for people with zero prior experience.</div></li>
           <li><div><strong>Simple, Intuitive Layout</strong> — Clear design so you focus on learning, not decoding.</div></li>
           <li><div><strong>Instant Access After Purchase</strong> — Download immediately, no waiting.</div></li>
           <li><div><strong>PDF Digital Download</strong> — Works on any device, phone, tablet, or computer.</div></li>
         </ul>
-        <div class="details-box">
+        <div class="details-box reveal" data-delay="120">
           <span class="details-box__tag">Product Details</span>
           <h3 class="details-box__title">Hair Braiding Training Manual</h3>
           <p class="details-box__list">
@@ -346,15 +425,15 @@
   <!-- PERFECT FOR -->
   <section class="section">
     <div class="container">
-      <span class="section__tag">Perfect For</span>
-      <h2 class="section__title">Is This Guide For You?</h2>
-      <p class="section__sub">This manual was built for anyone who wants to turn braiding into a real skill.</p>
+      <span class="section__tag reveal">Perfect For</span>
+      <h2 class="section__title reveal" data-delay="80">Is This Guide For You?</h2>
+      <p class="section__sub reveal" data-delay="150">This manual was built for anyone who wants to turn braiding into a real skill.</p>
       <div class="for-grid">
-        <div class="for-item">Beginners who want to learn how to braid</div>
-        <div class="for-item">Beauty and hairstyling students</div>
-        <div class="for-item">Aspiring hairstylists developing new skills</div>
-        <div class="for-item">Anyone who wants to turn a passion into a concrete skill</div>
-        <div class="for-item">People interested in the beauty and haircare industry</div>
+        <div class="for-item reveal" data-delay="0">Beginners who want to learn how to braid</div>
+        <div class="for-item reveal" data-delay="60">Beauty and hairstyling students</div>
+        <div class="for-item reveal" data-delay="120">Aspiring hairstylists developing new skills</div>
+        <div class="for-item reveal" data-delay="180">Anyone who wants to turn a passion into a concrete skill</div>
+        <div class="for-item reveal" data-delay="240">People interested in the beauty and haircare industry</div>
       </div>
     </div>
   </section>
@@ -364,9 +443,9 @@
   <!-- WHY DIFFERENT -->
   <section class="section section--alt">
     <div class="container">
-      <span class="section__tag">Why This Guide Is Different</span>
-      <h2 class="section__title">Most tutorials show you the result. This guide teaches you the process.</h2>
-      <div class="why-block">
+      <span class="section__tag reveal">Why This Guide Is Different</span>
+      <h2 class="section__title reveal" data-delay="80">Most tutorials show you the result. This guide teaches you the process.</h2>
+      <div class="why-block reveal" data-delay="160">
         <p>Instead of searching through dozens of videos that skip the important steps, you get a structured path that helps you build a solid foundation — and develop your skills with greater confidence.</p>
         <p>No scattered information. No missing pieces. Just a clear, complete system from page one to the last practice exercise.</p>
       </div>
@@ -376,17 +455,17 @@
   <!-- BONUSES -->
   <section class="section">
     <div class="container">
-      <div style="text-align:center;margin-bottom:28px"><span class="bonus-label">🎁 FREE Bonuses — Included With Every Purchase</span></div>
-      <span class="section__tag">Exclusive Bonuses</span>
-      <h2 class="section__title">Three Professional Templates — Included Free</h2>
-      <p class="section__sub">Go from student to professional from day one.</p>
-      <div class="bonus-img">
+      <div class="reveal" style="text-align:center;margin-bottom:28px"><span class="bonus-label">🎁 FREE Bonuses — Included With Every Purchase</span></div>
+      <span class="section__tag reveal">Exclusive Bonuses</span>
+      <h2 class="section__title reveal" data-delay="80">Three Professional Templates — Included Free</h2>
+      <p class="section__sub reveal" data-delay="150">Go from student to professional from day one.</p>
+      <div class="bonus-img reveal" data-delay="200">
         <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3CoHflE6XwKC5XeJge3JDzQw5PH/hf_20260609_194124_dc8f311d-603b-433c-8286-2279a6e61eb3.jpeg" alt="Bonus business templates" />
       </div>
       <div class="bonus-grid">
-        <div class="bonus-card"><div class="bonus-card__icon">📋</div><div class="bonus-card__title">Client Consultation Form</div><p class="bonus-card__desc">A professional form to collect client information before every appointment.</p></div>
-        <div class="bonus-card"><div class="bonus-card__icon">💲</div><div class="bonus-card__title">Hair Service Price List Template</div><p class="bonus-card__desc">A ready-to-use template to build your professional service price list.</p></div>
-        <div class="bonus-card"><div class="bonus-card__icon">📅</div><div class="bonus-card__title">Appointment Card</div><p class="bonus-card__desc">A professional appointment card to use with your clients from day one.</p></div>
+        <div class="bonus-card reveal" data-delay="0"><div class="bonus-card__icon">📋</div><div class="bonus-card__title">Client Consultation Form</div><p class="bonus-card__desc">A professional form to collect client information before every appointment.</p></div>
+        <div class="bonus-card reveal" data-delay="80"><div class="bonus-card__icon">💲</div><div class="bonus-card__title">Hair Service Price List Template</div><p class="bonus-card__desc">A ready-to-use template to build your professional service price list.</p></div>
+        <div class="bonus-card reveal" data-delay="160"><div class="bonus-card__icon">📅</div><div class="bonus-card__title">Appointment Card</div><p class="bonus-card__desc">A professional appointment card to use with your clients from day one.</p></div>
       </div>
     </div>
   </section>
@@ -394,11 +473,11 @@
   <!-- TESTIMONIALS -->
   <section class="section section--alt">
     <div class="container--wide">
-      <span class="section__tag">What They're Saying</span>
-      <h2 class="section__title">Real Results from Real Women</h2>
-      <p class="section__sub">Hundreds of beginners have used this guide to launch their braiding journey.</p>
+      <span class="section__tag reveal">What They're Saying</span>
+      <h2 class="section__title reveal" data-delay="80">Real Results from Real Women</h2>
+      <p class="section__sub reveal" data-delay="150">Hundreds of beginners have used this guide to launch their braiding journey.</p>
       <div class="testi-grid">
-        <div class="testi-card">
+        <div class="testi-card reveal" data-delay="0">
           <div class="testi-card__stars">★★★★★</div>
           <p class="testi-card__text">"I had zero experience before this. The step-by-step format made everything click instantly. I did my first braid the same day I downloaded it."</p>
           <div class="testi-card__author">
@@ -406,7 +485,7 @@
             <div><div class="testi-card__name">Jessica M.</div><div class="testi-card__role">Beauty Student, Atlanta</div></div>
           </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card reveal" data-delay="100">
           <div class="testi-card__stars">★★★★★</div>
           <p class="testi-card__text">"The bonuses alone are worth it. I used the consultation form in my first week. It made me look so much more professional to clients."</p>
           <div class="testi-card__author">
@@ -414,7 +493,7 @@
             <div><div class="testi-card__name">Tanya R.</div><div class="testi-card__role">Freelance Hairstylist, Houston</div></div>
           </div>
         </div>
-        <div class="testi-card">
+        <div class="testi-card reveal" data-delay="200">
           <div class="testi-card__stars">★★★★★</div>
           <p class="testi-card__text">"I bought this on a whim and ended up reading the whole thing in one sitting. The quality is impressive and the step-by-step photos make everything so clear."</p>
           <div class="testi-card__author">
@@ -429,10 +508,10 @@
   <!-- FAQ -->
   <section class="section">
     <div class="container">
-      <span class="section__tag">Got Questions?</span>
-      <h2 class="section__title">Frequently Asked Questions</h2>
-      <p class="section__sub" style="margin-bottom:40px">Everything you need to know before you buy.</p>
-      <div class="faq-list">
+      <span class="section__tag reveal">Got Questions?</span>
+      <h2 class="section__title reveal" data-delay="80">Frequently Asked Questions</h2>
+      <p class="section__sub reveal" data-delay="150" style="margin-bottom:40px">Everything you need to know before you buy.</p>
+      <div class="faq-list reveal" data-delay="220">
         <div class="faq-item"><button class="faq-q">Do I need any experience to use this guide?<span class="faq-icon">+</span></button><div class="faq-a">Not at all. This manual was built specifically for complete beginners — simple, jargon-free language from start to finish.</div></div>
         <div class="faq-item"><button class="faq-q">How do I receive my download after purchase?<span class="faq-icon">+</span></button><div class="faq-a">Instantly. As soon as your payment is confirmed, you'll receive an email with a direct download link. No waiting, no shipping.</div></div>
         <div class="faq-item"><button class="faq-q">Can I use this guide even if I have zero experience?<span class="faq-icon">+</span></button><div class="faq-a">Absolutely. The guide starts from the very basics — anatomy of the braid, tool selection, tension control — and builds up progressively. No prior experience needed.</div></div>
@@ -445,9 +524,9 @@
   <!-- INSTANT DOWNLOAD -->
   <section class="section section--alt">
     <div class="container" style="text-align:center">
-      <span class="section__tag">Instant Download</span>
-      <h2 class="section__title">Start Learning In the Next 60 Seconds</h2>
-      <div class="download-block">
+      <span class="section__tag reveal">Instant Download</span>
+      <h2 class="section__title reveal" data-delay="80">Start Learning In the Next 60 Seconds</h2>
+      <div class="download-block reveal" data-delay="160">
         <p>After your purchase you will immediately receive the PDF file and can start studying whenever you want — directly from your phone, tablet, or computer.</p>
         <div class="download-pills">
           <span class="download-pill">No shipping</span>
@@ -459,7 +538,7 @@
   </section>
 
   <!-- FINAL CTA -->
-  <section class="cta" id="buy">
+  <section class="cta reveal" id="buy">
     <div class="container">
       <span class="cta__tag">✦ Start Your Hair Braiding Journey ✦</span>
       <h2 class="cta__title">Build a Real Skill. Starting Today.</h2>
@@ -494,25 +573,132 @@
   </div>
 
   <script>
-    // FAQ accordion
-    document.querySelectorAll('.faq-q').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        const item=btn.closest('.faq-item'),isOpen=item.classList.contains('open');
-        document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-        if(!isOpen)item.classList.add('open');
+    /* ── 1. SCROLL REVEAL ── */
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.transitionDelay = (e.target.dataset.delay || 0) + 'ms';
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    /* ── 2. TEXT SPLIT REVEAL (hero title) ── */
+    (function() {
+      const title = document.getElementById('heroTitle');
+      if (!title) return;
+      const html = title.innerHTML;
+      // wrap each word (outside <em>) in a split-word span
+      const wrapped = html.replace(/(<em>.*?<\/em>|[^\s<]+)/g, (match) => {
+        if (match.startsWith('<em>')) return `<span class="split-word" style="margin-right:.25em"><span>${match}</span></span>`;
+        return `<span class="split-word" style="margin-right:.25em"><span>${match}</span></span>`;
+      });
+      title.innerHTML = wrapped;
+      const words = title.querySelectorAll('.split-word');
+      words.forEach((w, i) => {
+        setTimeout(() => w.classList.add('visible'), 80 + i * 55);
+      });
+    })();
+
+    /* ── 3. PRICE COUNTER ($97 → $9.99) ── */
+    (function() {
+      const el = document.getElementById('priceDisplay');
+      if (!el) return;
+      let started = false;
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !started) {
+          started = true;
+          obs.disconnect();
+          const start = 97, end = 9.99, duration = 1200;
+          const startTime = performance.now();
+          function tick(now) {
+            const p = Math.min((now - startTime) / duration, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            const val = start + (end - start) * ease;
+            el.textContent = '$' + val.toFixed(2);
+            if (p < 1) requestAnimationFrame(tick);
+            else el.textContent = '$9.99';
+          }
+          requestAnimationFrame(tick);
+        }
+      }, { threshold: 0.5 });
+      obs.observe(el);
+    })();
+
+    /* ── 4. PARALLAX (salon banner) ── */
+    (function() {
+      const img = document.getElementById('parallaxImg');
+      if (!img || window.matchMedia('(max-width:600px)').matches) return;
+      function onScroll() {
+        const banner = img.closest('.salon-banner');
+        const rect = banner.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.bottom < 0 || rect.top > vh) return;
+        const progress = (vh - rect.top) / (vh + rect.height);
+        const offset = (progress - 0.5) * 60;
+        img.style.transform = `translateY(${offset}px)`;
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    /* ── 5. MAGNETIC BUTTON ── */
+    document.querySelectorAll('.btn-primary, .cta__btn, .nav__cta').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.18}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
       });
     });
 
-    // Hide sticky bar when final CTA is visible
-    const buySection=document.getElementById('buy');
-    const stickyBar=document.getElementById('stickyBar');
-    if(buySection&&stickyBar){
-      const obs=new IntersectionObserver(entries=>{
-        stickyBar.style.opacity=entries[0].isIntersecting?'0':'1';
-        stickyBar.style.pointerEvents=entries[0].isIntersecting?'none':'auto';
-      },{threshold:0.1});
+    /* ── 6. CARD TILT 3D ── */
+    document.querySelectorAll('.learn-card, .bonus-card, .testi-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateZ(4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    /* ── 7. NAV scroll style ── */
+    (function() {
+      const nav = document.getElementById('mainNav');
+      function update() {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+      }
+      window.addEventListener('scroll', update, { passive: true });
+      update();
+    })();
+
+    /* ── 8. STICKY BAR hide on CTA ── */
+    (function() {
+      const buySection = document.getElementById('buy');
+      const stickyBar = document.getElementById('stickyBar');
+      if (!buySection || !stickyBar) return;
+      const obs = new IntersectionObserver(entries => {
+        stickyBar.style.opacity = entries[0].isIntersecting ? '0' : '1';
+        stickyBar.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+      }, { threshold: 0.1 });
       obs.observe(buySection);
-    }
+    })();
+
+    /* ── FAQ accordion ── */
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item'), isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
   </script>
 
 </body>
