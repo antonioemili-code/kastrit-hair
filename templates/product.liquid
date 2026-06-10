@@ -656,18 +656,19 @@
     /* ── MOBILE A: SECTION COLOR SHIFT ── */
     (function() {
       const sections = Array.from(document.querySelectorAll('.hero, .section, .cta'));
+      // hero · intro · learn · included · perfectfor · why · bonuses · testi · faq · download · cta
       const palette = [
-        '#FAF6F1',
-        '#FFFDF9',
-        '#F5ECD9',
-        '#FAF6F1',
-        '#FFF8F3',
-        '#FFFDF9',
-        '#F7F0E8',
-        '#FFFDF9',
-        '#FAF6F1',
-        '#FFFDF9',
-        '#FAF6F1',
+        '#FAF0E6', // hero        — lino caldo
+        '#FDF8F2', // intro       — bianco avorio
+        '#F2EAD8', // learn       — sabbia dorata
+        '#FDFAF5', // included    — bianco puro
+        '#F7EDE0', // perfect for — pesca chiara
+        '#EEE5D6', // why         — argilla chiara
+        '#FAF2E4', // bonuses     — oro pallido
+        '#FDF5EC', // testi       — crema rosata
+        '#F5F0EA', // faq         — grigio caldo
+        '#F9F3E8', // download    — ambra soft
+        '#F2E8DA', // cta         — terracotta chiara
       ];
       document.body.style.transition = 'background-color 1s cubic-bezier(.22,1,.36,1)';
       let activeIdx = -1;
