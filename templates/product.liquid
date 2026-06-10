@@ -653,7 +653,34 @@
       });
     });
 
-    /* ── MOBILE A: SCROLL PROGRESS BAR ── */
+    /* ── MOBILE A: SECTION COLOR SHIFT ── */
+    (function() {
+      const sections = document.querySelectorAll('.section, .hero, .cta');
+      const palette = [
+        '#FAF6F1', // cream
+        '#FFFDF9', // warm white
+        '#F5ECD9', // gold pale
+        '#FAF6F1',
+        '#FFF8F3', // peach tint
+        '#FAF6F1',
+        '#F7F0E8', // sand
+        '#FFFDF9',
+        '#FAF6F1',
+      ];
+      let current = 0;
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const idx = Array.from(sections).indexOf(e.target) % palette.length;
+            document.body.style.transition = 'background-color .8s cubic-bezier(.22,1,.36,1)';
+            document.body.style.backgroundColor = palette[idx];
+          }
+        });
+      }, { threshold: 0.4 });
+      sections.forEach(s => obs.observe(s));
+    })();
+
+    /* ── MOBILE B: SCROLL PROGRESS BAR ── */
     (function() {
       const bar = document.createElement('div');
       bar.style.cssText = 'position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#C9A96E,#C4714A);width:0%;z-index:9999;transition:width .1s linear;pointer-events:none';
@@ -709,17 +736,10 @@
 
       document.querySelectorAll('.btn-primary, .cta__btn, .sticky-bar__btn').forEach(btn => {
         btn.addEventListener('click', e => {
-          /* haptic */
-          if (navigator.vibrate) navigator.vibrate([12, 40, 8]);
-          /* confetti from tap/click point */
           const r = btn.getBoundingClientRect();
-          const x = (e.clientX || r.left + r.width / 2);
-          const y = (e.clientY || r.top + r.height / 2);
-          confetti(x, y);
+          confetti(e.clientX || r.left + r.width / 2, e.clientY || r.top + r.height / 2);
         });
-        /* touch support */
         btn.addEventListener('touchstart', e => {
-          if (navigator.vibrate) navigator.vibrate([12, 40, 8]);
           const t = e.touches[0];
           confetti(t.clientX, t.clientY);
         }, { passive: true });
