@@ -39,12 +39,8 @@
 
     /* LOGO */
     .logo{
-      font-family:'Cormorant Garamond',serif;
-      font-size:clamp(1rem,3vw,1.2rem);
-      font-weight:400;
-      letter-spacing:.32em;
-      text-transform:uppercase;
-      color:var(--soft);
+      width:clamp(120px,40vw,180px);
+      height:auto;
       margin-bottom:56px;
       opacity:0;
       animation:fadein .8s cubic-bezier(.22,1,.36,1) .1s forwards;
@@ -145,7 +141,10 @@
   {% assign first_product = collections.all.products.first %}
 
   <div class="page">
-    <span class="logo">Kastrit</span>
+    <svg class="logo" viewBox="0 0 180 38" xmlns="http://www.w3.org/2000/svg" aria-label="Kastrit">
+      <text x="0" y="30" font-family="'Cormorant Garamond', Georgia, serif" font-size="30" font-weight="700" letter-spacing="5" fill="#1A100D">KASTRIT</text>
+      <circle cx="173" cy="34" r="3" fill="#C9A96E"/>
+    </svg>
 
     <h1 class="headline">
       The Art<br>of <em>Braiding.</em>

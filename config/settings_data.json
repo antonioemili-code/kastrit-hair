@@ -1,3 +1,14 @@
 {
-  "current": "Default"
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "colors_accent_1": "#C4714A",
+      "colors_accent_2": "#C9A96E",
+      "colors_background_1": "#FFFDF9",
+      "colors_background_2": "#FAF6F1",
+      "colors_text": "#1A100D",
+      "colors_button": "#C4714A",
+      "colors_button_label": "#FFFFFF"
+    }
+  }
 }
