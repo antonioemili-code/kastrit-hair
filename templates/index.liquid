@@ -202,5 +202,54 @@
     }
   </script>
 
+  <!-- COOKIE BANNER -->
+  <style>
+    .cookie-bar{
+      position:fixed;bottom:0;left:0;right:0;z-index:10000;
+      padding:14px 20px;
+      background:rgba(26,16,13,.96);
+      backdrop-filter:blur(10px);
+      display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+      transform:translateY(100%);
+      transition:transform .5s cubic-bezier(.22,1,.36,1);
+      will-change:transform;
+    }
+    .cookie-bar.visible{transform:translateY(0)}
+    .cookie-bar__text{font-size:.73rem;color:rgba(255,255,255,.6);line-height:1.5;font-family:'Inter',sans-serif;max-width:540px;flex:1}
+    .cookie-bar__text a{color:#C9A96E;text-decoration:underline}
+    .cookie-bar__actions{display:flex;gap:10px;flex-shrink:0}
+    .cookie-btn{padding:8px 20px;border-radius:2px;font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;font-family:'Inter',sans-serif;transition:opacity .2s}
+    .cookie-btn:hover{opacity:.85}
+    .cookie-btn--accept{background:#C4714A;color:#fff}
+    .cookie-btn--decline{background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15)}
+    @media(max-width:600px){
+      .cookie-bar{flex-direction:column;align-items:flex-start;padding:16px}
+      .cookie-bar__actions{width:100%;justify-content:flex-end}
+    }
+  </style>
+  <div class="cookie-bar" id="cookieBar" role="dialog" aria-label="Cookie notice">
+    <p class="cookie-bar__text">
+      We use cookies to improve your experience. By continuing you agree to our
+      <a href="/policies/privacy-policy">Privacy Policy</a>.
+    </p>
+    <div class="cookie-bar__actions">
+      <button class="cookie-btn cookie-btn--decline" id="cookieDecline">Decline</button>
+      <button class="cookie-btn cookie-btn--accept" id="cookieAccept">Accept</button>
+    </div>
+  </div>
+  <script>
+    (function(){
+      if(localStorage.getItem('kastrit_cookie')) return;
+      const bar = document.getElementById('cookieBar');
+      setTimeout(() => bar.classList.add('visible'), 1800);
+      function dismiss(val){
+        bar.style.transform = 'translateY(100%)';
+        localStorage.setItem('kastrit_cookie', val);
+      }
+      document.getElementById('cookieAccept').addEventListener('click', () => dismiss('accepted'));
+      document.getElementById('cookieDecline').addEventListener('click', () => dismiss('declined'));
+    })();
+  </script>
+
 </body>
 </html>
